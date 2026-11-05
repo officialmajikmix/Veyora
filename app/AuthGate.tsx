@@ -22,7 +22,7 @@ export async function AuthGate({ children }: { children: ReactNode }) {
   const supabase = createServerClient(url, key, {
     cookies: {
       getAll() { return cookieStore.getAll(); },
-      setAll(cookiesToSet) {
+      setAll(cookiesToSet: { name: string; value: string; options?: Parameters<typeof cookieStore.set>[2] }[]) {
         try {
           cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
         } catch {
@@ -31,7 +31,8 @@ export async function AuthGate({ children }: { children: ReactNode }) {
       },
     },
   });
-  const { data: { claims } } = await supabase.auth.getClaims();
+  const { data } = await supabase.auth.getClaims();
+  const claims = data?.claims;
 
   if (!claims) {
     return (
@@ -50,7 +51,7 @@ export async function AuthGate({ children }: { children: ReactNode }) {
     const client = createServerClient(url!, key!, {
       cookies: {
         getAll() { return cookieStore.getAll(); },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: { name: string; value: string; options?: Parameters<typeof cookieStore.set>[2] }[]) {
           cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
         },
       },
@@ -61,7 +62,7 @@ export async function AuthGate({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className="member-toolbar"><span>Signed in as {claims.email}</span><form action={signOut}><button type="submit">Sign out</button></form></div>
+      <div className="member-toolbar"><span>Signed in as {claims.email ?? "member"}</span><form action={signOut}><button type="submit">Sign out</button></form></div>
       {children}
     </>
   );
