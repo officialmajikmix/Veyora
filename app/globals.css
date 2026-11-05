@@ -14,3 +14,43 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 /* Rice harvest illustration: warm woven sack, measured grain stream and a restrained loop. */
 .rice-pour{position:absolute;inset:0;z-index:2;pointer-events:none}.field .visual-shape{opacity:.18}.field .visual-caption{display:none}.rice-pour-cup{position:absolute;z-index:2;top:47px;left:calc(50% - 22px);width:44px;height:25px;clip-path:polygon(0 0,100% 0,76% 70%,61% 100%,39% 100%,24% 70%);background:linear-gradient(105deg,#9b7a43,#e1c889 45%,#b38d4e);filter:drop-shadow(0 5px 5px #334b3430)}.rice-pour-cup:before{content:"";position:absolute;left:4px;right:4px;top:0;height:4px;border-radius:50%;background:#f0dba5}.rice-grain-stream{position:absolute;z-index:2;top:67px;left:calc(50% - 15px);width:30px;height:67px}.rice-grain{position:absolute;top:0;left:var(--rice-left);width:6px;height:3px;border-radius:70% 30% 70% 30%;background:linear-gradient(90deg,#fff6d8,#c7a35d);box-shadow:0 0 3px #fff9;animation:rice-fall 1.28s cubic-bezier(.45,.1,.56,.9) infinite;animation-delay:var(--rice-delay)}.rice-grain:nth-child(1){--rice-left:13px;--rice-delay:-.12s;--rice-drift:-7px;--rice-static:3px}.rice-grain:nth-child(2){--rice-left:4px;--rice-delay:-.25s;--rice-drift:6px;--rice-static:8px}.rice-grain:nth-child(3){--rice-left:20px;--rice-delay:-.38s;--rice-drift:-3px;--rice-static:13px}.rice-grain:nth-child(4){--rice-left:9px;--rice-delay:-.51s;--rice-drift:9px;--rice-static:18px}.rice-grain:nth-child(5){--rice-left:17px;--rice-delay:-.64s;--rice-drift:-9px;--rice-static:23px}.rice-grain:nth-child(6){--rice-left:2px;--rice-delay:-.77s;--rice-drift:3px;--rice-static:28px}.rice-grain:nth-child(7){--rice-left:23px;--rice-delay:-.9s;--rice-drift:-6px;--rice-static:33px}.rice-grain:nth-child(8){--rice-left:11px;--rice-delay:-1.03s;--rice-drift:8px;--rice-static:38px}.rice-grain:nth-child(9){--rice-left:6px;--rice-delay:-1.16s;--rice-drift:-2px;--rice-static:43px}.rice-grain:nth-child(10){--rice-left:19px;--rice-delay:-.06s;--rice-drift:5px;--rice-static:48px}.rice-grain:nth-child(11){--rice-left:1px;--rice-delay:-.19s;--rice-drift:-8px;--rice-static:53px}.rice-grain:nth-child(12){--rice-left:15px;--rice-delay:-.32s;--rice-drift:2px;--rice-static:58px}@keyframes rice-fall{0%{opacity:0;transform:translate3d(0,-3px,0) rotate(-24deg)}12%{opacity:1}78%{opacity:1}100%{opacity:0;transform:translate3d(var(--rice-drift),62px,0) rotate(420deg)}}.rice-bag{position:absolute;z-index:3;left:50%;bottom:13px;width:88px;height:73px;transform:translateX(-50%);filter:drop-shadow(0 8px 8px #293c3028)}.rice-bag-body{position:absolute;inset:7px 0 0;overflow:hidden;clip-path:polygon(18% 0,82% 0,100% 100%,0 100%);background-color:#d7bd84;background-image:repeating-linear-gradient(90deg,#94784920 0 1px,transparent 1px 7px),repeating-linear-gradient(0deg,#fff7 0 1px,transparent 1px 7px),linear-gradient(105deg,#b8985d,#f0dfb1 48%,#c4a46a);border-bottom:2px solid #917749}.rice-bag-stamp{position:absolute;left:50%;top:34px;transform:translateX(-50%);text-align:center;color:#53624b;font:600 6px/1.15 Georgia,serif;letter-spacing:.12em}.rice-bag-mouth{position:absolute;z-index:2;top:0;left:14%;width:72%;height:15px;border:2px solid #917749;border-radius:50%;background:linear-gradient(180deg,#645537 0 54%,#bda36f 56% 100%)}.rice-bag-fill{position:absolute;z-index:3;top:4px;left:28%;width:44%;height:8px;border-radius:50%;background:radial-gradient(ellipse at 50% 35%,#fff4cf,#d9bd7c 75%)}.field .card-art:after{content:"";position:absolute;inset:auto -18% 0;height:28%;z-index:1;pointer-events:none;background:repeating-linear-gradient(174deg,transparent 0 9px,#f5f0d64d 10px 11px,transparent 12px 20px);opacity:.75}.rice-pour{isolation:isolate}.field .card-number,.field .card-tag{z-index:5}.field .rice-pour{z-index:2}@media(max-width:640px){.rice-pour{transform:scale(.82);transform-origin:50% 53%}.rice-bag{bottom:10px}.field .card-art:after{height:23%}}@media(prefers-reduced-motion:reduce){.rice-grain{animation:none!important;opacity:1!important;transform:translateY(var(--rice-static)) rotate(35deg)!important}}
+
+/* Energy illustration: turbines, solar array and a flowing power pulse. */
+.energy .visual-shape{display:none}
+.energy .visual-caption{z-index:7;color:#f8fff4;text-shadow:0 1px 5px #173c39aa}
+.energy-scene{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none;background:linear-gradient(180deg,#bbd0cd 0%,#d8ded2 62%,#9eafa0 100%);isolation:isolate}
+.energy-sky-glow{position:absolute;width:145px;height:145px;left:calc(50% - 72px);top:-45px;border-radius:50%;background:#f5edc7;opacity:.46;filter:blur(8px);animation:energy-glow 5s ease-in-out infinite}
+.energy-ridge{position:absolute;left:-10%;width:120%;border-radius:50% 50% 0 0}
+.energy-ridge-back{height:58px;bottom:33px;background:linear-gradient(180deg,#9eb4a5,#829f91);transform:rotate(-4deg)}
+.energy-ridge-front{height:42px;bottom:-18px;background:linear-gradient(180deg,#597d70,#355d52);transform:rotate(3deg)}
+.energy-current{position:absolute;z-index:3;inset:35px 0 4px;width:100%;height:78%;overflow:visible}
+.current-track,.current-spark{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.current-track{stroke:#f4ffe4aa;stroke-width:1.5}
+.current-spark{stroke:#e9ffb8;stroke-width:2;stroke-dasharray:5 34;animation:current-flow 1.35s linear infinite;filter:drop-shadow(0 0 5px #ecffbb)}
+.solar-array{position:absolute;z-index:4;left:12%;bottom:5px;width:76%;height:25px;display:flex;gap:3px;transform:perspective(80px) rotateX(20deg) skewX(-8deg);filter:drop-shadow(0 2px 3px #213a3640)}
+.solar-array i{flex:1;border:1px solid #b7d8cc99;background:repeating-linear-gradient(90deg,transparent 0 9px,#d6ede455 10px),linear-gradient(145deg,#426c69,#234c4e)}
+.energy-turbine{position:absolute;z-index:5;bottom:22px;width:38px;height:106px}
+.energy-turbine.turbine-left{left:20%;bottom:22px;transform:scale(.68);transform-origin:bottom center}
+.energy-turbine.turbine-right{right:18%;bottom:28px;transform:scale(.58);transform-origin:bottom center}
+.energy-turbine.turbine-main{left:50%;bottom:14px;transform:translateX(-50%);width:44px;height:130px}
+.turbine-tower{position:absolute;left:50%;bottom:0;width:2px;height:calc(100% - 20px);background:linear-gradient(90deg,#52756e,#f2f3dc 48%,#6e8d7f);transform:translateX(-50%);box-shadow:0 0 3px #fff7}
+.turbine-rotor{position:absolute;left:50%;top:4px;width:0;height:0;animation:rotor-spin 4.4s linear infinite}
+.turbine-left .turbine-rotor{animation-duration:5.2s;animation-direction:reverse}
+.turbine-right .turbine-rotor{animation-duration:6.1s}
+.turbine-rotor:after{content:"";position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:#f2f3df;box-shadow:0 0 7px #e4f4d8}
+.turbine-rotor i{position:absolute;left:-1.5px;bottom:0;width:3px;height:29px;border-radius:90% 90% 2px 2px;transform-origin:50% 100%;background:linear-gradient(180deg,#f3f4df,#668b7f);box-shadow:0 0 3px #edf6e988}
+.turbine-rotor i:nth-child(2){transform:rotate(120deg)}
+.turbine-rotor i:nth-child(3){transform:rotate(240deg)}
+.turbine-left .turbine-rotor i,.turbine-right .turbine-rotor i{height:24px}
+.energy-powerline{position:absolute;z-index:6;right:11%;top:58px;width:22px;height:58px;border-right:1px solid #eef5d8aa;border-left:1px solid #eef5d877;transform:skewY(-11deg);opacity:.86}
+.energy-powerline:before,.energy-powerline:after{content:"";position:absolute;left:-7px;width:34px;border-top:1px solid #f1f5d9aa}
+.energy-powerline:before{top:7px}.energy-powerline:after{top:13px}
+.energy-powerline i{position:absolute;width:4px;height:4px;left:calc(50% - 2px);top:20px;border-radius:50%;background:#efffb8;box-shadow:0 0 7px 3px #eaffb877;animation:power-signal 2s ease-in-out infinite}
+@keyframes rotor-spin{to{transform:rotate(360deg)}}
+@keyframes current-flow{to{stroke-dashoffset:-39}}
+@keyframes power-signal{0%,100%{transform:translateY(0);opacity:.65}50%{transform:translateY(24px);opacity:1}}
+@keyframes energy-glow{0%,100%{opacity:.35;transform:scale(.94)}50%{opacity:.6;transform:scale(1.08)}}
+@media(max-width:640px){.energy-scene{transform:scale(.86);transform-origin:50% 55%}.energy .visual-shape{display:none}.energy-turbine.turbine-main{height:114px}}
+@media(prefers-reduced-motion:reduce){.turbine-rotor,.current-spark,.energy-powerline i,.energy-sky-glow{animation:none!important}.current-spark{stroke-dasharray:6 32}}
+
+.turbine-tower{height:calc(100% - 8px)}
