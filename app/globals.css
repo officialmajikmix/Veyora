@@ -71,3 +71,6 @@
 @keyframes photo-drift{from{transform:scale(1.02)}to{transform:scale(1.09)}}
 @media(max-width:640px){.hero-art:before{inset:-3%}.field .card-art:before{inset:-3%}.energy-scene:before,.gold-scene:before{inset:-3%}.hero-art .currency-symbol{backdrop-filter:blur(3px)}}
 @media(prefers-reduced-motion:reduce){.hero-art:before,.field .card-art:before,.energy-scene:before,.gold-scene:before{animation:none!important;transform:none!important}}
+
+/* Reliable photo background for the hero scene. */
+.hero-art{background-color:#415f4b;background-image:linear-gradient(180deg,#10271d18 20%,#10271d08 48%,#10271d6b 100%),url(https://images.unsplash.com/photo-1663908378462-96f985b176bd?auto=format&fit=crop&w=1800&q=85);background-position:center;background-size:cover}
