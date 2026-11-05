@@ -78,3 +78,29 @@
 /* Extra motion for the photo-led investment scenes. */
 .field .card-art:before{animation:harvest-camera 14s ease-in-out infinite alternate}.energy-turbine{display:block}.energy-turbine.turbine-left,.energy-turbine.turbine-right{display:none}.energy-turbine.turbine-main{left:50%;bottom:-4px;transform:translateX(-50%);width:44px;height:96%}.energy-turbine.turbine-main .turbine-rotor{top:2px}.energy-turbine.turbine-main .turbine-rotor i{height:43px;width:3px;left:-1.5px}.turbine-tower{height:calc(100% - 10px);width:2px}.gold-glow,.gold-coin,.gold-bars{display:block}.gold-bars{right:10%;bottom:15px;animation:gold-bars-sway 5.2s ease-in-out infinite}.gold-bar{animation:gold-bar-shine 3.8s ease-in-out infinite alternate}.bar-middle{animation-delay:-1.2s}.bar-top{animation-delay:-2.4s}.gold-coin{z-index:3}.coin-back{animation:coin-spin 8s ease-in-out infinite}.coin-front{animation:coin-spin 6.5s ease-in-out infinite reverse}@keyframes harvest-camera{0%{transform:scale(1.04) translate3d(-1.2%,0,0)}100%{transform:scale(1.12) translate3d(1.2%,-.5%,0)}}@keyframes gold-bars-sway{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-5px) rotate(1deg)}}@keyframes gold-bar-shine{from{filter:brightness(.94)}to{filter:brightness(1.16)}}
 @media(max-width:640px){.energy-turbine.turbine-main{height:94%}.energy-turbine.turbine-main .turbine-rotor i{height:31px}.gold-bars{right:2%;bottom:18px;transform-origin:bottom right}}@media(prefers-reduced-motion:reduce){.field .card-art:before,.gold-bars,.gold-bar{animation:none!important}.energy-turbine.turbine-main .turbine-rotor{animation:none!important}}
+
+
+/* Account access and member gate */
+.auth-page{min-height:100vh;padding:34px 7.4%;background:radial-gradient(ellipse at 75% 18%,#e5e8db 0,transparent 34%),var(--paper)}
+.auth-card{width:min(100%,480px);margin:8vh auto 6vh;padding:clamp(28px,6vw,48px);background:#fffefa;border:1px solid #e6e3d8;box-shadow:0 24px 70px #1b39220c}
+.auth-card h1{font-size:clamp(42px,8vw,60px);margin:22px 0 10px;color:var(--ink)}
+.auth-card>p{font-size:12px;line-height:1.7;color:#68746c}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;margin:28px 0 23px;border-bottom:1px solid var(--line)}
+.auth-tabs button{padding:13px 8px;border:0;border-bottom:2px solid transparent;background:transparent;color:#788078;font:inherit;font-size:11px;cursor:pointer}
+.auth-tabs button[aria-selected=true]{border-bottom-color:var(--green);color:var(--green);font-weight:700}
+.auth-card form{display:grid;gap:10px}
+.auth-card label{margin-top:5px;color:#34443a;font-size:10px;font-weight:600}
+.auth-card input{width:100%;min-height:46px;padding:12px 13px;border:1px solid #d8dcd3;border-radius:2px;background:white;color:var(--ink);font:inherit;font-size:13px;outline:none}
+.auth-card input:focus{border-color:var(--green);box-shadow:0 0 0 3px #174c3915}
+.auth-submit{width:100%;min-height:46px;margin-top:12px;border:0;cursor:pointer}
+.auth-submit:disabled{opacity:.55;cursor:not-allowed}
+.auth-note,.auth-message{padding:12px 14px;border-left:2px solid var(--gold);background:#f3f0e5;color:#58655b!important;font-size:10px!important}
+.auth-message{border-color:var(--green);background:#eff4ef;overflow-wrap:anywhere}
+.auth-home{display:inline-block;margin-top:24px;color:#607067;font-size:10px}
+.auth-gate-message{min-height:280px;padding:58px 8%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;background:#eeece3}
+.auth-gate-message h2{max-width:600px;margin:18px 0 12px;font-size:clamp(32px,5vw,52px);line-height:1.04}
+.auth-gate-message p{max-width:520px;margin:0 0 22px;color:#69746d;font-size:12px;line-height:1.8}
+.member-toolbar{display:flex;justify-content:flex-end;align-items:center;gap:16px;padding:10px 7.4%;background:#eeece3;color:#526057;font-size:10px}
+.member-toolbar form{margin:0}
+.member-toolbar button{border:1px solid #d4d6cc;border-radius:2px;background:transparent;padding:8px 12px;color:var(--green);font:inherit;cursor:pointer}
+@media(max-width:640px){.auth-page{padding:24px 6%}.auth-card{margin:7vh auto 3vh}.auth-gate-message{padding:42px 6%;min-height:245px}.member-toolbar{padding:9px 6%;font-size:9px}}
