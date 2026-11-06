@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main className="policy-page">
-      <style jsx global>{`
+      <style>{`
         .public-footer { min-height: 68px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 7.2%; border-top: 1px solid #deded5; color: #778078; font: 8px Arial, sans-serif; letter-spacing: .12em; }
         .public-footer a:first-child { color: #294333; font-weight: 700; letter-spacing: .18em; }
         .public-footer a:first-child span { color: #bd9b57; }
