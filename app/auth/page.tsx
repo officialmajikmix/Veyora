@@ -52,12 +52,12 @@ export default function AuthPage() {
         </div>
         <form onSubmit={submit}>
           <label htmlFor="email">Email address</label>
-          <input id="email" type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} />
+          <input id="email" type="email" autoComplete="email" required disabled={!configured || busy} value={email} onChange={(event) => setEmail(event.target.value)} />
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" autoComplete={mode === "signin" ? "current-password" : "new-password"} minLength={8} required value={password} onChange={(event) => setPassword(event.target.value)} />
+          <input id="password" type="password" autoComplete={mode === "signin" ? "current-password" : "new-password"} minLength={8} required disabled={!configured || busy} value={password} onChange={(event) => setPassword(event.target.value)} />
           <button className="button button-dark auth-submit" type="submit" disabled={busy || !configured}>{busy ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}</button>
         </form>
-        {!configured && <p className="auth-note">Veyora is connecting its secure sign-in service. Account access will open after setup.</p>}
+        {!configured && <p className="auth-note">Secure account access is not available yet. The sign-in service will be connected before Veyora accepts email or password details.</p>}
         {message && <p className="auth-message" role="status">{message}</p>}
         <a className="auth-home" href="/">← Back to home</a>
       </section>
