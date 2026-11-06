@@ -92,6 +92,8 @@ export default function Home({ memberMode = false }: { memberMode?: boolean }) {
 
       <BriefingTicker />
 
+      {!memberMode && <footer className="public-footer"><a href="/">VEYORA<span>.</span></a><a href="/privacy">Privacy &amp; cookies</a><span>INFORMATION BEFORE CAPITAL.</span></footer>}
+
       {memberMode && <>
       <section className="intro-band" id="approach">
         <span className="section-index">01 / OUR APPROACH</span>
