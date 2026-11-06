@@ -9,6 +9,22 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main className="policy-page">
+      <style jsx global>{`
+        .public-footer { min-height: 68px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 7.2%; border-top: 1px solid #deded5; color: #778078; font: 8px Arial, sans-serif; letter-spacing: .12em; }
+        .public-footer a:first-child { color: #294333; font-weight: 700; letter-spacing: .18em; }
+        .public-footer a:first-child span { color: #bd9b57; }
+        .public-footer a:nth-child(2) { color: #52675a; text-decoration: underline; text-underline-offset: 3px; }
+        .policy-page { min-height: 100vh; padding: 38px 7.2% 80px; background: #f7f6f1; }
+        .policy-content { max-width: 760px; margin: 72px auto 0; }
+        .policy-content h1 { margin: 22px 0 12px; color: #17231c; font-size: clamp(48px, 7vw, 76px); line-height: 1; }
+        .policy-content h1 em { color: #38634d; font-weight: 400; }
+        .policy-content h2 { margin: 38px 0 10px; color: #203b2b; font-size: 25px; letter-spacing: -.025em; }
+        .policy-content p { color: #5e6c63; font: 14px/1.85 Arial, sans-serif; }
+        .policy-content a:not(.brand) { color: #2e6045; text-decoration: underline; text-underline-offset: 3px; }
+        .policy-updated { font-size: 11px !important; letter-spacing: .05em; }
+        .policy-back { display: inline-block; margin-top: 20px; font: 12px Arial, sans-serif; }
+        @media (max-width: 680px) { .policy-page { padding: 25px 6% 55px; } .policy-content { margin-top: 52px; } .policy-content p { font-size: 13px; } }
+      `}</style>
       <a className="brand" href="/" aria-label="Veyora home"><span className="brand-mark">V</span><span>VEYORA<span className="brand-period">.</span></span></a>
       <article className="policy-content">
         <div className="eyebrow"><span className="eyebrow-rule" /> PRIVACY &amp; COOKIES</div>
