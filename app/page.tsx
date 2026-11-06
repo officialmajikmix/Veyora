@@ -1,36 +1,138 @@
-import { AuthGate } from "./AuthGate";
+import { BriefingTicker } from "./BriefingTicker";
+import { TaskCenter } from "./TaskCenter";
 
-const Arrow = ({ diagonal = false }: { diagonal?: boolean }) => (
-  <svg aria-hidden="true" viewBox="0 0 20 20" className="arrow-icon">
-    {diagonal ? <path d="M5 15 15 5M6 5h9v9" /> : <path d="M3 10h13m-5-5 5 5-5 5" />}
-  </svg>
-);
+const opportunities = [
+  {
+    index: "01",
+    name: "Land & food systems",
+    description: "Understand the people, land, inputs and routes to market behind agricultural activity.",
+    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=85",
+    alt: "Rows of crops across a green agricultural landscape",
+    theme: "land",
+  },
+  {
+    index: "02",
+    name: "Energy infrastructure",
+    description: "Explore the assets and operating context that support energy generation and delivery.",
+    image: "https://images.unsplash.com/photo-1473341304170-9711a5a4d8c7?auto=format&fit=crop&w=1200&q=85",
+    alt: "Wind turbines in a wide landscape at sunset",
+    theme: "energy",
+  },
+  {
+    index: "03",
+    name: "Precious materials",
+    description: "Learn how provenance, custody, liquidity and market exposure shape precious-material assets.",
+    image: "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=1200&q=85",
+    alt: "Gold bars arranged under warm light",
+    theme: "materials",
+  },
+];
 
-const categories = [
-  { number: "01", title: "Agriculture", text: "Explore opportunities connected to the land, harvests and the systems that help communities grow.", theme: "field", label: "LAND & HARVEST", id: "agriculture" },
-  { number: "02", title: "Energy", text: "Discover energy-linked projects and the infrastructure that keeps economies moving.", theme: "energy", label: "ENERGY & INFRASTRUCTURE", id: "energy" },
-  { number: "03", title: "Precious metals", text: "Learn about opportunities associated with gold and other tangible stores of value.", theme: "gold", label: "GOLD & MATERIALS", id: "precious-metals" },
+const principles = [
+  ["01", "Show the source", "Every material claim should point to who supplied it, when it was reviewed and what evidence supports it."],
+  ["02", "Make risk legible", "Liquidity, concentration, operating and market risks belong beside the opportunity, in plain language."],
+  ["03", "Report with context", "Updates should separate verified facts, estimates and projections, with dates and methods clearly stated."],
 ];
-const steps = [
-  ["01", "Learn", "Review the project, its structure, risks, fees and available documentation."],
-  ["02", "Decide", "Consider whether the opportunity fits your goals and your ability to bear risk."],
-  ["03", "Track", "Follow project updates and reporting where provided. Asset values can rise or fall."],
+
+const briefingItems = [
+  { category: "LAND & FOOD", title: "What makes an agricultural asset resilient?", type: "Field guide" },
+  { category: "ENERGY SYSTEMS", title: "Reading the infrastructure behind energy", type: "Explainer" },
+  { category: "PRECIOUS MATERIALS", title: "Provenance, custody and the path of a material", type: "Due diligence" },
 ];
+
+function Arrow({ diagonal = false }: { diagonal?: boolean }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 20 20" className="arrow-icon">
+      {diagonal ? <path d="M5 15 15 5M6 5h9v9" /> : <path d="M3 10h13m-5-5 5 5-5 5" />}
+    </svg>
+  );
+}
+
+function Brand() {
+  return <a className="brand" href="#top" aria-label="Veyora home"><span className="brand-mark">V</span><span>VEYORA<span className="brand-period">.</span></span></a>;
+}
 
 export default function Home() {
-  return <main>
-    <div className="announcement"><span className="announcement-dot" /> A considered way to explore real-world assets <span className="announcement-divider">·</span> <a href="/auth">Member access <Arrow diagonal /></a></div>
-    <header className="site-header"><a className="brand" href="#top" aria-label="Veyora home"><span className="brand-mark">V</span><span>VEYORA<span className="brand-period">.</span></span></a><nav className="desktop-nav" aria-label="Main navigation"><a href="#top">Home</a></nav><a className="header-cta" href="/auth">Sign in <Arrow diagonal /></a><a className="mobile-menu" href="/auth?mode=signup" aria-label="Create an account">Join <Arrow /></a></header>
-    <section className="hero" id="top"><div className="hero-copy"><div className="eyebrow"><span className="eyebrow-line" /> INVESTMENT, WITH PERSPECTIVE</div><h1>Build a closer<br />connection to <em>what<br className="desktop-break" /> matters.</em></h1><p className="hero-subtitle">Explore opportunities rooted in the real economy, with the context to make a more considered decision.</p><div className="hero-actions"><a className="button button-dark" href="/auth">Sign in to explore <Arrow /></a><a className="text-link" href="/auth?mode=signup">Create an account <Arrow diagonal /></a></div><a className="hero-invest" href="#opportunities">Invest <Arrow /></a><div className="hero-note"><span className="note-icon">✳</span><span>Thoughtful access.<br /><strong>Clear-eyed decisions.</strong></span></div></div><div className="hero-art" aria-label="Cultivated landscape with floating international currency symbols"><div className="currency-drift" aria-hidden="true"><span className="currency-symbol symbol-dollar">$</span><span className="currency-symbol symbol-euro">€</span><span className="currency-symbol symbol-pound">£</span><span className="currency-symbol symbol-yen">¥</span><span className="currency-symbol symbol-naira">₦</span><span className="currency-symbol symbol-rupee">₹</span></div><div className="art-grain" /><div className="sun-halo" /><div className="sun" /><div className="orb orbit-one" /><div className="orb orbit-two" /><div className="land land-back" /><div className="land land-mid" /><div className="land land-front" /><div className="art-label label-top"><span className="tiny-star">✳</span> REAL-WORLD ASSETS</div><div className="art-label label-bottom"><span className="label-rule" /> GROUNDED IN THE LONG VIEW</div><div className="art-coordinate">38° 43&apos; 12.8&quot; N<br />09° 08&apos; 21.4&quot; W</div></div><div className="hero-foot"><span>AN OPENING PERSPECTIVE</span><span>01 — 03</span><span>SCROLL TO EXPLORE ↓</span></div></section>
-    <div id="opportunities"><AuthGate>
-      <section className="intro-strip" id="approach"><span className="strip-index">A DIFFERENT KIND OF CONNECTION</span><p>Real assets are part of everyday life. <strong>Understanding them is where good decisions begin.</strong></p><a href="#how-it-works" aria-label="Read our approach"><Arrow diagonal /></a></section>
-      <section className="opportunities section-wrap" id="investment-types"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" /> EXPLORE THE LANDSCAPE</div><h2>Value, in its<br /><em>many forms.</em></h2></div><p>Different assets. Different dynamics. Start with the ones you want to understand, then take the time to explore the details.</p></div>
-        <div className="category-grid">{categories.map((item) => <article className={"category-card " + item.theme} id={item.id} key={item.number}><div className="card-art"><span className="card-number">{item.number} / 03</span><span className="card-tag">{item.label}</span><div className="visual-shape" />{item.theme === "field" && <div className="rice-pour" aria-hidden="true"><div className="rice-pour-cup" /><div className="rice-grain-stream">{Array.from({ length: 12 }, (_, grain) => <i className="rice-grain" key={grain} />)}</div><div className="rice-bag"><div className="rice-bag-body"><span className="rice-bag-stamp">VEYORA<br />HARVEST</span></div><span className="rice-bag-fill" /><span className="rice-bag-mouth" /></div></div>}{item.theme === "energy" && <div className="energy-scene" aria-hidden="true"><div className="energy-sky-glow" /><div className="energy-ridge energy-ridge-back" /><div className="energy-ridge energy-ridge-front" /><svg className="energy-current" viewBox="0 0 320 160" preserveAspectRatio="none"><path className="current-track" d="M-10 120 C40 94 70 136 115 108 S185 97 218 110 S272 132 330 93" /><path className="current-spark" d="M-10 120 C40 94 70 136 115 108 S185 97 218 110 S272 132 330 93" /></svg><div className="solar-array"><i /><i /><i /><i /></div><div className="energy-turbine turbine-small turbine-left"><span className="turbine-tower" /><span className="turbine-rotor"><i /><i /><i /></span></div><div className="energy-turbine turbine-main"><span className="turbine-tower" /><span className="turbine-rotor"><i /><i /><i /></span></div><div className="energy-turbine turbine-small turbine-right"><span className="turbine-tower" /><span className="turbine-rotor"><i /><i /><i /></span></div><div className="energy-powerline"><i /></div></div>}{item.theme === "gold" && <div className="gold-scene" aria-hidden="true"><div className="gold-glow" /><div className="gold-coin coin-back"><span>V</span></div><div className="gold-coin coin-front"><span>V</span></div><div className="gold-bars"><div className="gold-bar bar-bottom">VEYORA</div><div className="gold-bar bar-middle">999.9</div><div className="gold-bar bar-top">V</div></div><div className="gold-glint" /></div>}<div className="visual-detail" /><span className="visual-caption">A closer look <Arrow diagonal /></span></div><div className="card-content"><div><h3>{item.title}</h3><p>{item.text}</p><a className="category-invest" href="#how-it-works">Explore {item.title} <Arrow /></a></div><a href="#responsibility" className="round-arrow" aria-label={"Learn about " + item.title}><Arrow diagonal /></a></div></article>)}</div>
-        <div className="opportunities-foot"><span>THREE LENSES. ONE REAL-WORLD VIEW.</span><a href="#responsibility">Explore with care <Arrow /></a></div></section>
-      <section className="manifesto"><div className="manifesto-stamp">V<span>✳</span></div><div className="eyebrow eyebrow-light"><span className="eyebrow-line" /> OUR POINT OF VIEW</div><h2>Clarity is part of<br />the <em>opportunity.</em></h2><div className="manifesto-bottom"><p>We believe access should come with context. That means explaining how an opportunity works, what could go wrong and what you should consider before making a decision.</p><a className="button button-light" href="#responsibility">Our principles <Arrow /></a></div><div className="manifesto-sun" /></section>
-      <section className="how section-wrap" id="how-it-works"><div className="how-heading"><div className="eyebrow"><span className="eyebrow-line" /> A MORE CONSIDERED PROCESS</div><h2>Take it one<br /><em>step at a time.</em></h2><p>An informed decision takes more than a headline. Here’s a simple place to begin.</p></div><div className="steps">{steps.map(([number, title, text]) => <article className="step" key={number}><span className="step-no">{number}</span><span className="step-line" /><h3>{title}</h3><p>{text}</p></article>)}</div></section>
-      <section className="risk-section" id="responsibility"><div className="risk-inner"><div className="risk-icon">!</div><div className="risk-copy"><div className="eyebrow eyebrow-light"><span className="eyebrow-line" /> IMPORTANT INFORMATION</div><h2>Real opportunity<br />comes with <em>real risk.</em></h2><p>Investing involves risk, including possible loss of capital. Asset values can fall as well as rise, liquidity may be limited, and past performance is not a reliable indicator of future results. Information on this page is for general information only and is not investment advice, an offer or a recommendation.</p><p>Before investing, review the relevant legal documents and consider seeking independent advice. Availability, eligibility, fees and terms depend on the specific opportunity and your jurisdiction.</p></div><div className="risk-side"><span>PLEASE TAKE THE TIME TO UNDERSTAND</span><div className="risk-checks"><span>Capital at risk</span><span>Returns not guaranteed</span><span>Terms vary by opportunity</span></div><span className="risk-footnote">Illustrative information only</span></div></div></section>
-      <footer className="site-footer"><div className="footer-top"><a className="brand footer-brand" href="#top"><span className="brand-mark">V</span><span>VEYORA<span className="brand-period">.</span></span></a><p>A longer view of the real world.</p><a className="back-top" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 VEYORA. ALL RIGHTS RESERVED.</span><div><a href="#responsibility">Risk disclosure</a><a href="#responsibility">Privacy</a><a href="#responsibility">Terms</a></div><span>INVEST THOUGHTFULLY.</span></div></footer>
-    </AuthGate></div>
-  </main>;
+  return (
+    <main id="top">
+      <div className="notice-bar"><span className="notice-indicator" /> Veyora is an informational preview. No investment products are currently available.</div>
+      <header className="site-header">
+        <Brand />
+        <nav className="desktop-nav" aria-label="Main navigation">
+          <a href="#approach">Our approach</a>
+          <a href="#landscape">Asset landscape</a>
+          <a href="#briefing">Briefing</a>
+          <a href="#tasks">Tasks &amp; earn</a>
+        </nav>
+        <a className="header-link" href="/auth">Member access <Arrow diagonal /></a>
+        <a className="mobile-link" href="/auth">Sign in</a>
+      </header>
+
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-copy">
+          <div className="eyebrow"><span className="eyebrow-rule" /> REAL ASSETS. CLEARER CONTEXT.</div>
+          <h1 id="hero-title">Capital deserves<br />a <em>clearer view.</em></h1>
+          <p className="hero-lede">A research-first way to understand real-world assets, the systems around them and the risks that deserve your attention.</p>
+          <div className="hero-actions"><a className="button button-primary" href="#landscape">Explore the landscape <Arrow /></a><a className="quiet-link" href="#approach">How we think <Arrow diagonal /></a></div>
+          <div className="hero-caption"><span className="caption-mark">✳</span><span>Independent thinking begins<br /><strong>with better questions.</strong></span></div>
+        </div>
+        <div className="hero-image" role="img" aria-label="Aerial view across a cultivated landscape at golden hour">
+          <div className="hero-image-shade" />
+          <div className="image-index">VEYORA FIELD NOTE <span>01 / 03</span></div>
+          <div className="image-caption"><span className="caption-line" /> LAND, SYSTEMS &amp; LONG-TERM THINKING</div>
+          <div className="image-coordinate">FIELD STUDY<br />INFORMATIONAL PREVIEW</div>
+          <span className="hero-image-ring" />
+        </div>
+        <div className="hero-meta"><span>INFORMATION FIRST</span><span>RISK IN VIEW</span><a href="#approach">SCROLL TO EXPLORE ↓</a></div>
+      </section>
+
+      <BriefingTicker />
+
+      <section className="intro-band" id="approach">
+        <span className="section-index">01 / OUR APPROACH</span>
+        <p>Real-world assets are complex.<br /><strong>Understanding should not be.</strong></p>
+        <a href="#principles" aria-label="Read the Veyora principles"><Arrow diagonal /></a>
+      </section>
+
+      <section className="principles section-shell" id="principles">
+        <div className="section-heading">
+          <div><div className="eyebrow"><span className="eyebrow-rule" /> A STANDARD TO WORK TOWARD</div><h2>Trust is built<br />in the <em>details.</em></h2></div>
+          <p>Veyora is being shaped around the information a careful decision requires: clear sources, honest risk context and reporting that explains what is known—and what is not.</p>
+        </div>
+        <div className="principle-grid">{principles.map(([number, title, body]) => <article className="principle-card" key={number}><span className="principle-number">{number}</span><span className="principle-icon" aria-hidden="true">{number === "01" ? "↗" : number === "02" ? "◉" : "⌁"}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
+        <p className="preview-note">These are product principles, not a representation that specific assets, controls or reporting services are currently available.</p>
+      </section>
+
+      <section className="landscape section-shell" id="landscape">
+        <div className="section-heading landscape-heading">
+          <div><div className="eyebrow"><span className="eyebrow-rule" /> EXPLORE BY ASSET CLASS</div><h2>Start with the<br /><em>real economy.</em></h2></div>
+          <p>Explore the systems connected to land, energy and materials. This overview is educational; it does not describe a live offering or an available investment.</p>
+        </div>
+        <div className="asset-grid">{opportunities.map((item) => <article className={`asset-card asset-${item.theme}`} key={item.index}>
+          <div className="asset-image" role="img" aria-label={item.alt} style={{ backgroundImage: `linear-gradient(180deg, #07130d08 30%, #07130dcc 100%), url("${item.image}")` }}><span className="asset-number">{item.index} / 03</span><span className="asset-tag">EDUCATIONAL OVERVIEW</span><span className="asset-orbit" /></div>
+          <div className="asset-body"><div><h3>{item.name}</h3><p>{item.description}</p><a className="asset-link" href="#due-diligence">Explore the context <Arrow /></a></div><span className="asset-arrow" aria-hidden="true"><Arrow diagonal /></span></div>
+        </article>)}</div>
+      </section>
+
+      <section className="due-diligence" id="due-diligence">
+        <div className="diligence-visual" role="img" aria-label="Sunlight over a mountain ridge" />
+        <div className="diligence-copy"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> BEFORE ANY DECISION</div><h2>Ask what sits<br />behind the <em>headline.</em></h2><p>A serious review looks beyond a category name. It asks who operates the asset, how value is assessed, what could interrupt performance and how an investor might exit.</p><div className="diligence-list"><div><span>01</span> Asset &amp; ownership</div><div><span>02</span> Operator &amp; counterparties</div><div><span>03</span> Valuation &amp; assumptions</div><div><span>04</span> Liquidity, fees &amp; exit</div></div><a className="button button-light" href="#risk">Our risk principles <Arrow /></a><div className="diligence-seal">CONTEXT<br /><span>BEFORE</span><br />CAPITAL</div></div>
+      </section>
+
+      <section className="briefing section-shell" id="briefing">
+        <div className="briefing-top"><div><div className="eyebrow"><span className="eyebrow-rule" /> THE VEYORA BRIEFING</div><h2>Information with<br /><em>the source attached.</em></h2></div><p>News and explainers should carry a publication date, a direct source and clear labels for fact, analysis and opinion. The feed below is a design preview; live editorial sources are not connected.</p></div>
+        <div className="briefing-grid">{briefingItems.map((item, index) => <article className="briefing-card" key={item.title}><div className={`briefing-art briefing-art-${index + 1}`}><span>{item.category}</span><span className="briefing-glyph">{index === 0 ? "↗" : index === 1 ? "⌁" : "◈"}</span></div><div className="briefing-card-body"><div className="briefing-label"><span>{item.type}</span><span>EDITORIAL PREVIEW</span></div><h3>{item.title}</h3><p>Preview topic. A published item will include a date, author, source link and relevant context.</p><a href="#briefing" aria-label={`Read ${item.title} when published`}>Read briefing <Arrow /></a></div></article>)}</div>
+        <div className="briefing-foot"><span><i /> FEED STATUS: PREVIEW ONLY</span><span>SOURCE-LINKED UPDATES WILL APPEAR HERE</span></div>
+      </section>
+
+      <section className="tasks-section" id="tasks">
+        <div className="tasks-intro"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> MEMBER LEARNING PROGRAMME</div><h2>Learn first.<br /><em>Earn with clarity.</em></h2><p>Complete short learning activities and track progress in one place. This prototype uses sample points only; no cash rewards, redemptions or live tasks are available.</p><a className="button button-light" href="/auth?mode=signup">Create a free account <Arrow /></a><div className="tasks-watermark" aria-hidden="true">V</div></div>
+        <TaskCenter />
+      </section>
+
+      <section className="risk-section" id="risk"><div className="risk-symbol">!</div><div className="risk-content"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> IMPORTANT INFORMATION</div><h2>Real opportunity<br />comes with <em>real risk.</em></h2><p>Investing involves risk, including possible loss of capital. Asset values can rise or fall, liquidity may be limited, and past performance does not predict future results. Nothing on this page is investment advice, an offer or a recommendation.</p><p>Veyora is an informational preview. No investment products are currently available through this site. Any future opportunity would require complete documentation, eligibility checks and review for the relevant jurisdiction.</p></div><div className="risk-aside"><span>READ BEFORE YOU ACT</span><div><span>Capital at risk</span><span>Returns not guaranteed</span><span>Terms vary by product</span></div><small>Informational preview only</small></div></section>
+
+      <footer className="site-footer"><div className="footer-main"><div><Brand /><p>A longer view of the real world.</p></div><div className="footer-links"><a href="#approach">Our approach</a><a href="#landscape">Asset landscape</a><a href="#briefing">Briefing</a><a href="#tasks">Tasks &amp; earn</a></div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 VEYORA. ALL RIGHTS RESERVED.</span><div><a href="#risk">Risk information</a><a href="/auth">Member access</a></div><span>INFORMATION BEFORE CAPITAL.</span></div></footer>
+    </main>
+  );
 }
