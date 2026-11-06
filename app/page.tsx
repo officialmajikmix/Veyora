@@ -52,20 +52,24 @@ function Brand() {
   return <a className="brand" href="#top" aria-label="Veyora home"><span className="brand-mark">V</span><span>VEYORA<span className="brand-period">.</span></span></a>;
 }
 
-export default function Home() {
+export default function Home({ memberMode = false }: { memberMode?: boolean }) {
   return (
     <main id="top">
       <div className="notice-bar"><span className="notice-indicator" /> Veyora is an informational preview. No investment products are currently available.</div>
       <header className="site-header">
         <Brand />
-        <nav className="desktop-nav" aria-label="Main navigation">
+        {memberMode && <nav className="desktop-nav" aria-label="Main navigation">
           <a href="#approach">Our approach</a>
           <a href="#landscape">Asset landscape</a>
           <a href="#briefing">Briefing</a>
           <a href="#tasks">Tasks &amp; earn</a>
-        </nav>
-        <a className="header-link" href="/auth">Member access <Arrow diagonal /></a>
-        <a className="mobile-link" href="/auth">Sign in</a>
+        </nav>}
+        {memberMode ? <a className="header-link" href="/member">Member home <Arrow diagonal /></a> : <>
+          <a className="header-link" href="/auth?mode=signin">Sign in <Arrow diagonal /></a>
+          <a className="header-link header-signup" href="/auth?mode=signup">Sign up</a>
+          <a className="mobile-link" href="/auth?mode=signin">Sign in</a>
+          <a className="mobile-link mobile-signup" href="/auth?mode=signup">Sign up</a>
+        </>}
       </header>
 
       <section className="hero" aria-labelledby="hero-title">
@@ -88,6 +92,7 @@ export default function Home() {
 
       <BriefingTicker />
 
+      {memberMode && <>
       <section className="intro-band" id="approach">
         <span className="section-index">01 / OUR APPROACH</span>
         <p>Real-world assets are complex.<br /><strong>Understanding should not be.</strong></p>
@@ -126,13 +131,14 @@ export default function Home() {
       </section>
 
       <section className="tasks-section" id="tasks">
-        <div className="tasks-intro"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> MEMBER LEARNING PROGRAMME</div><h2>Learn first.<br /><em>Earn with clarity.</em></h2><p>Complete short learning activities and track progress in one place. This prototype uses sample points only; no cash rewards, redemptions or live tasks are available.</p><a className="button button-light" href="/auth?mode=signup">Create a free account <Arrow /></a><div className="tasks-watermark" aria-hidden="true">V</div></div>
+        <div className="tasks-intro"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> MEMBER LEARNING PROGRAMME</div><h2>Learn first.<br /><em>Earn with clarity.</em></h2><p>Explore video, form and partner registration tasks. Cash rewards will appear only after the task provider and payout process are connected.</p><a className="button button-light" href="#task-activities">View task preview <Arrow /></a><div className="tasks-watermark" aria-hidden="true">V</div></div>
         <TaskCenter />
       </section>
 
       <section className="risk-section" id="risk"><div className="risk-symbol">!</div><div className="risk-content"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> IMPORTANT INFORMATION</div><h2>Real opportunity<br />comes with <em>real risk.</em></h2><p>Investing involves risk, including possible loss of capital. Asset values can rise or fall, liquidity may be limited, and past performance does not predict future results. Nothing on this page is investment advice, an offer or a recommendation.</p><p>Veyora is an informational preview. No investment products are currently available through this site. Any future opportunity would require complete documentation, eligibility checks and review for the relevant jurisdiction.</p></div><div className="risk-aside"><span>READ BEFORE YOU ACT</span><div><span>Capital at risk</span><span>Returns not guaranteed</span><span>Terms vary by product</span></div><small>Informational preview only</small></div></section>
 
-      <footer className="site-footer"><div className="footer-main"><div><Brand /><p>A longer view of the real world.</p></div><div className="footer-links"><a href="#approach">Our approach</a><a href="#landscape">Asset landscape</a><a href="#briefing">Briefing</a><a href="#tasks">Tasks &amp; earn</a></div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 VEYORA. ALL RIGHTS RESERVED.</span><div><a href="#risk">Risk information</a><a href="/auth">Member access</a></div><span>INFORMATION BEFORE CAPITAL.</span></div></footer>
+      <footer className="site-footer"><div className="footer-main"><div><Brand /><p>A longer view of the real world.</p></div><div className="footer-links"><a href="#approach">Our approach</a><a href="#landscape">Asset landscape</a><a href="#briefing">Briefing</a><a href="#tasks">Tasks &amp; earn</a></div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 VEYORA. ALL RIGHTS RESERVED.</span><div><a href="#risk">Risk information</a><a href="/member">Member home</a></div><span>INFORMATION BEFORE CAPITAL.</span></div></footer>
+      </>}
     </main>
   );
 }

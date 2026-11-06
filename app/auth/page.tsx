@@ -36,7 +36,7 @@ export default function AuthPage() {
       setMessage("Check your email to confirm your account, then sign in here.");
       return;
     }
-    window.location.assign("/");
+    window.location.assign("/member");
   }
 
   return (
