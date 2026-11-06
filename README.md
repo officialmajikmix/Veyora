@@ -1,6 +1,6 @@
 # VEYORA
 
-VEYORA is a responsive Next.js landing page introducing a considered approach to exploring real-world asset opportunities across agriculture, energy and precious metals.
+Veyora is a Next.js informational preview for exploring real-world asset categories, due-diligence principles, member learning activities and source-led briefings.
 
 ## Run locally
 
@@ -11,12 +11,24 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000 to view the site. Use `npm run build` to create a production build.
+Open http://localhost:3000.
 
-## Deploy
+## Account access
 
-Import this repository into Vercel and use the detected Next.js framework defaults. No environment variables are required for the landing page.
+The sign-in route uses Supabase. Configure these Vercel environment variables before enabling account access:
 
-## Scope
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 
-This repository currently contains a marketing landing page only. It does not accept deposits, enable withdrawals, offer investment advice, or promise returns. Any future investment products, financial claims or transaction features need appropriate business, legal and regulatory review before launch.
+The public information pages do not require those variables.
+
+## Current preview boundaries
+
+- No investment product, deposit, withdrawal, cash reward or redemption is available through this site.
+- Task completion and points are an in-page demonstration. Progress resets when the visitor leaves; points have no cash value.
+- Briefing cards are editorial design previews, not current news. A live feed needs named sources, publication dates, editorial review and an update process.
+- The site does not provide investment advice, make return promises or establish that a real asset, operator, control or reporting service has been verified.
+
+## Before a live product
+
+Confirm the business model, assets and counterparties; document fees, valuation, custody, liquidity, eligibility and withdrawal terms; decide how any task reward is funded and paid; define source licensing and news review; and obtain appropriate legal, regulatory, privacy and security review for each target jurisdiction. Do not describe a product as available until these facts and systems are in place.
