@@ -294,6 +294,48 @@ a:focus-visible, button:focus-visible { outline: 2px solid #bd9b57; outline-offs
   .auth-card { margin: 7vh auto 3vh; }
 }
 
+/* Quiet dimensional motion across the existing artwork and interface. */
+.hero-image { transform-style: preserve-3d; animation: hero-depth 14s ease-in-out infinite alternate; }
+.hero-image-shade { transform: translateZ(18px); animation: shade-breathe 9s ease-in-out infinite alternate; }
+.hero-image-ring { transform: translateZ(34px); animation: ring-drift 18s ease-in-out infinite alternate; }
+.principle-icon { transform-style: preserve-3d; animation: icon-depth 7s ease-in-out infinite alternate; }
+.asset-card, .briefing-card { transform-style: preserve-3d; transition: transform .65s cubic-bezier(.2,.65,.25,1), box-shadow .65s ease; }
+.asset-card:hover, .briefing-card:hover { transform: perspective(1000px) rotateX(1.2deg) rotateY(-1.2deg) translateY(-5px); box-shadow: 0 18px 38px #17231c14; }
+.asset-image:before { transform-origin: center; animation: image-breathe 12s ease-in-out infinite alternate; }
+.asset-card:hover .asset-image:before { animation-play-state: paused; transform: scale(1.045) translateZ(16px); }
+.asset-orbit { transform-style: preserve-3d; animation: orbit-depth 8s ease-in-out infinite alternate; }
+.asset-orbit:after { animation: orbit-dot 7s linear infinite; transform-origin: 22px 15px; }
+.diligence-visual { background-size: auto, 110% 110%; background-position: center, 50% 50%; animation: landscape-depth 18s ease-in-out infinite alternate; }
+.diligence-seal { transform-style: preserve-3d; animation: seal-depth 10s ease-in-out infinite alternate; }
+.briefing-art { transform-style: preserve-3d; }
+.briefing-art:before { transform-origin: center; animation: art-breathe 13s ease-in-out infinite alternate; }
+.briefing-card:hover .briefing-art:before { animation-play-state: paused; transform: scale(1.06) translateZ(18px); }
+.briefing-glyph { transform-style: preserve-3d; animation: glyph-depth 8s ease-in-out infinite alternate; }
+.task-center { transform-style: preserve-3d; transition: transform .55s ease, box-shadow .55s ease; }
+.task-center:hover { transform: perspective(1200px) rotateX(.6deg) translateY(-3px); box-shadow: 0 26px 76px #07150e38; }
+.task-row { transition: background .2s ease, transform .35s ease; }
+.task-row:hover { transform: perspective(800px) translateZ(7px) translateX(3px); }
+.task-action { transition: transform .3s ease, box-shadow .3s ease, background .3s ease; }
+.task-action:hover { transform: translateY(-2px) translateZ(8px); box-shadow: 0 7px 16px #17231c18; }
+.points-balance strong { display: inline-block; animation: points-depth 5s ease-in-out infinite alternate; }
+.risk-symbol { transform-style: preserve-3d; animation: risk-depth 8s ease-in-out infinite alternate; }
+.brand-mark { transform-style: preserve-3d; animation: brand-depth 9s ease-in-out infinite alternate; }
+
+@keyframes hero-depth { from { transform: perspective(1200px) rotateY(-.6deg) rotateX(.35deg) scale(1); } to { transform: perspective(1200px) rotateY(.6deg) rotateX(-.35deg) scale(1.018); } }
+@keyframes shade-breathe { from { opacity: .78; transform: translateZ(18px) scale(1); } to { opacity: 1; transform: translateZ(18px) scale(1.035); } }
+@keyframes ring-drift { from { transform: translate3d(0,0,34px) rotate(-9deg) scale(.98); } to { transform: translate3d(5px,-8px,44px) rotate(8deg) scale(1.035); } }
+@keyframes icon-depth { from { transform: perspective(500px) rotateX(-6deg) rotateY(-8deg) translateY(0); } to { transform: perspective(500px) rotateX(7deg) rotateY(8deg) translateY(-4px); } }
+@keyframes image-breathe { from { transform: scale(1) translateZ(0); } to { transform: scale(1.035) translateZ(12px); } }
+@keyframes orbit-depth { from { transform: perspective(400px) rotateX(0deg) rotateY(-12deg) translateY(0); } to { transform: perspective(400px) rotateX(16deg) rotateY(12deg) translateY(-5px); } }
+@keyframes orbit-dot { to { transform: rotate(360deg); } }
+@keyframes landscape-depth { from { background-position: center, 48% 50%; } to { background-position: center, 55% 47%; } }
+@keyframes seal-depth { from { transform: perspective(500px) rotate(-20deg) rotateY(-12deg); } to { transform: perspective(500px) rotate(-15deg) rotateY(12deg); } }
+@keyframes art-breathe { from { transform: scale(1) translateZ(0); } to { transform: scale(1.045) translateZ(8px); } }
+@keyframes glyph-depth { from { transform: perspective(400px) rotateX(-5deg) rotateY(-9deg) translateY(0); } to { transform: perspective(400px) rotateX(8deg) rotateY(10deg) translateY(-5px); } }
+@keyframes points-depth { from { transform: perspective(400px) rotateY(-7deg) translateY(0); } to { transform: perspective(400px) rotateY(7deg) translateY(-2px); } }
+@keyframes risk-depth { from { transform: perspective(350px) rotateY(-12deg) translateY(0); } to { transform: perspective(350px) rotateY(12deg) translateY(-4px); } }
+@keyframes brand-depth { from { transform: rotate(-8deg) perspective(300px) rotateY(-8deg); } to { transform: rotate(-8deg) perspective(300px) rotateY(8deg); } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto!important; animation-duration: .01ms!important; animation-iteration-count: 1!important; transition-duration: .01ms!important; }
   .ticker-track { animation: none!important; }
