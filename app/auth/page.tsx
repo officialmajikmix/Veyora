@@ -62,10 +62,13 @@ export default function AuthPage() {
     try {
       const supabase = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!);
       if (mode === "recovery") {
+        const secureCookie = window.location.protocol === "https:" ? "; Secure" : "";
+        document.cookie = "veyora_recovery=1; Max-Age=900; Path=/; SameSite=Lax" + secureCookie;
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: window.location.origin + "/auth/reset-password",
+          redirectTo: window.location.origin + "/auth/callback",
         });
         if (error) {
+          document.cookie = "veyora_recovery=; Max-Age=0; Path=/; SameSite=Lax";
           setMessage(readableAuthError(error));
           return;
         }
@@ -87,6 +90,7 @@ export default function AuthPage() {
       }
       window.location.assign("/member");
     } catch (error) {
+      if (mode === "recovery") document.cookie = "veyora_recovery=; Max-Age=0; Path=/; SameSite=Lax";
       setMessage(readableAuthError(error));
     } finally {
       setBusy(false);
