@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const description = "Music production, beat licensing, mixing, mastering, and studio recording by MajikMix Worldwide. Request a clear written quote before checkout.";
-const title = "MajikMix Worldwide — Music Production & Sound";
+const description = "Music production, beat licensing, mixing, mastering, and studio recording by Majik Mix. Request a clear written quote before checkout.";
+const title = "Majik Mix — Music Production & Sound";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://veyora-ecru.vercel.app"),
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    siteName: "MajikMix Worldwide",
+    siteName: "Majik Mix",
     title,
     description,
     images: ["https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=85"],
