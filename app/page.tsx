@@ -19,7 +19,7 @@ const priceSections = [
     ["Highlife", "₦350,000", "Live arrangement scoped to the song and musician lineup."],
     ["Afro Highlife", "₦400,000", "Live arrangement scoped to the song and musician lineup."],
     ["Hip-hop Highlife", "₦400,000", "Live arrangement scoped to the song and musician lineup."],
-    ["Gospel", "₦450,000", "Live arrangement scoped to the song and musician lineup."],
+    ["Gospel", "₦500,000", "Live arrangement scoped to the song and musician lineup."],
   ] },
   { title: "Mixing & mastering", subtitle: "Choose a traditional stereo finish or a Dolby Atmos mix.", items: [
     ["Traditional stereo mix", "₦100,000", "Per song; prepared from organized, approved session files."],
