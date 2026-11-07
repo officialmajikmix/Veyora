@@ -350,3 +350,42 @@ a:focus-visible, button:focus-visible { outline: 2px solid #bd9b57; outline-offs
   *, *::before, *::after { scroll-behavior: auto!important; animation-duration: .01ms!important; animation-iteration-count: 1!important; transition-duration: .01ms!important; }
   .ticker-track { animation: none!important; }
 }
+
+
+.planning-page { min-height: 100vh; padding: 34px 7.2% 72px; background: #f7f6f1; color: #17231c; }
+.planning-page > .brand { display: inline-flex; }
+.planning-hero { max-width: 760px; margin: 74px auto 52px; }
+.planning-hero h1 { margin: 22px 0 18px; font-size: clamp(50px, 8vw, 86px); line-height: .98; letter-spacing: -.065em; }
+.planning-hero h1 em { color: #38634d; font-weight: 400; }
+.planning-hero > p { max-width: 560px; color: #5e6c63; font: 15px/1.8 Arial, sans-serif; }
+.planning-boundary { margin-top: 26px; padding: 15px 18px; border-left: 2px solid #bd9b57; background: #eeede6; color: #526158; font: 12px/1.7 Arial, sans-serif; }
+.planning-boundary strong { color: #203b2b; }
+.planning-columns { display: grid; grid-template-columns: minmax(260px, .8fr) minmax(0, 1.2fr); gap: 24px; max-width: 1020px; margin: 0 auto; align-items: start; }
+.planning-form, .saved-plans { padding: 26px; border: 1px solid #deded5; background: #fffefa; }
+.planning-form { display: grid; gap: 14px; }
+.planning-form .eyebrow, .saved-plans .eyebrow { color: #627268; }
+.planning-form label { margin-top: 4px; color: #293d31; font: 12px Arial, sans-serif; }
+.planning-form select { width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid #d6d8cf; border-radius: 0; background: #fff; color: #203b2b; font: 13px Arial, sans-serif; }
+.planning-form .button { margin-top: 4px; border: 0; cursor: pointer; }
+.planning-form .button:disabled { cursor: wait; opacity: .65; }
+.planning-privacy { margin: 0; color: #778078; font: 11px/1.65 Arial, sans-serif; }
+.saved-plans-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid #e2e3dc; }
+.saved-plans-heading h2 { margin: 8px 0 0; color: #203b2b; font-size: 28px; letter-spacing: -.04em; }
+.plan-count { color: #bd9b57; font: 12px Arial, sans-serif; letter-spacing: .08em; }
+.plan-empty { padding: 18px 0 4px; color: #748077; font: 13px/1.8 Arial, sans-serif; }
+.saved-plan-list { display: grid; }
+.saved-plan { padding: 20px 0; border-bottom: 1px solid #e2e3dc; }
+.saved-plan:last-child { border-bottom: 0; }
+.saved-plan.is-complete h3 { color: #79847d; text-decoration: line-through; text-decoration-color: #bd9b57; }
+.saved-plan-meta { display: flex; justify-content: space-between; gap: 12px; color: #65756b; font: 9px Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.saved-plan-meta span:last-child { color: #ad8950; }
+.saved-plan h3 { margin: 11px 0 16px; color: #263e30; font-size: 17px; font-weight: 500; }
+.saved-plan-actions { display: flex; gap: 18px; }
+.saved-plan-actions button { padding: 0; border: 0; background: transparent; color: #365943; cursor: pointer; font: 11px Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; }
+.planning-message { max-width: 1020px; margin: 18px auto 0; color: #365943; font: 12px/1.6 Arial, sans-serif; }
+.planning-disclaimer { max-width: 1020px; margin: 28px auto 0; color: #758078; font: 11px/1.75 Arial, sans-serif; }
+.planning-back { display: inline-block; max-width: 1020px; margin: 24px auto 0; color: #365943; font: 11px Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; }
+.member-planning-entry { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 7.2%; border-bottom: 1px solid #e5e5dc; background: #f7f6f1; color: #365943; font: 11px/1.6 Arial, sans-serif; text-decoration: none; }
+.member-planning-entry strong { color: #203b2b; font: 600 13px Arial, sans-serif; }
+.member-planning-entry > span:last-child { color: #bd9b57; font-size: 18px; }
+@media (max-width: 720px) { .planning-page { padding: 26px 6% 52px; } .planning-hero { margin: 52px auto 35px; } .planning-columns { grid-template-columns: 1fr; } .planning-form, .saved-plans { padding: 20px; } }
