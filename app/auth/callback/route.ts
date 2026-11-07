@@ -5,15 +5,18 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
+  const recovery = request.cookies.get("veyora_recovery")?.value === "1";
   const next = searchParams.get("next");
-  const destination = next === "/auth/reset-password" ? next : "/member";
+  const destination = recovery || next === "/auth/reset-password" ? "/auth/reset-password" : "/member";
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
   if (code && destination === "/auth/reset-password") {
     const resetUrl = new URL(destination, origin);
     resetUrl.searchParams.set("code", code);
-    return NextResponse.redirect(resetUrl);
+    const response = NextResponse.redirect(resetUrl);
+    response.cookies.delete("veyora_recovery");
+    return response;
   }
 
   if (code && url && key) {
@@ -30,5 +33,7 @@ export async function GET(request: NextRequest) {
     if (!error) return NextResponse.redirect(new URL(destination, origin));
   }
 
-  return NextResponse.redirect(new URL("/auth?error=confirmation", origin));
+  const response = NextResponse.redirect(new URL("/auth?error=confirmation", origin));
+  response.cookies.delete("veyora_recovery");
+  return response;
 }
