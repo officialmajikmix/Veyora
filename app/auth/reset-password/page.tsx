@@ -21,8 +21,6 @@ export default function ResetPasswordPage() {
   useEffect(() => {
     if (verificationStarted.current) return;
     verificationStarted.current = true;
-    let active = true;
-
     async function verifyRecoveryLink() {
       if (!supabase) {
         setMessage("Password recovery is not available right now. Please try again later.");
@@ -47,20 +45,17 @@ export default function ResetPasswordPage() {
           setMessage("This reset link is invalid or has expired. Request a new password reset link and try again.");
           return;
         }
-        if (active) {
-          setLinkReady(true);
-          window.history.replaceState({}, document.title, url.pathname);
-        }
+        setLinkReady(true);
+        window.history.replaceState({}, document.title, url.pathname);
       } catch (error) {
         const detail = error instanceof Error ? error.message : "";
         setMessage(detail || "This reset link could not be verified. Request a new link and try again.");
       } finally {
-        if (active) setVerifying(false);
+        setVerifying(false);
       }
     }
 
     void verifyRecoveryLink();
-    return () => { active = false; };
   }, [supabase]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
