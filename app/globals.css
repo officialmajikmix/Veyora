@@ -389,3 +389,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid #bd9b57; outline-offs
 .member-planning-entry strong { color: #203b2b; font: 600 13px Arial, sans-serif; }
 .member-planning-entry > span:last-child { color: #bd9b57; font-size: 18px; }
 @media (max-width: 720px) { .planning-page { padding: 26px 6% 52px; } .planning-hero { margin: 52px auto 35px; } .planning-columns { grid-template-columns: 1fr; } .planning-form, .saved-plans { padding: 20px; } }
+
+
+.planning-prompts { padding: 17px 18px; background: #eef1eb; border: 1px solid #dfe5dc; }
+.planning-prompts h2 { margin: 0 0 10px; color: #203b2b; font: 16px/1.3 var(--font-display, Georgia, serif); }
+.planning-prompts ul { display: grid; gap: 9px; margin: 0; padding-left: 18px; color: #53625a; font: 12px/1.6 Arial, sans-serif; }
+.planning-prompts p { margin: 12px 0 0; color: #778078; font: 10px/1.6 Arial, sans-serif; }
