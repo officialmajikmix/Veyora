@@ -1,147 +1,58 @@
-import { ReferralProgram } from "./ReferralProgram";
-import { BriefingTicker } from "./BriefingTicker";
-import { TaskCenter } from "./TaskCenter";
-
-const opportunities = [
-  {
-    index: "01",
-    name: "Land & food systems",
-    description: "Understand the people, land, inputs and routes to market behind agricultural activity.",
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=85",
-    alt: "Rows of crops across a green agricultural landscape",
-    theme: "land",
-  },
-  {
-    index: "02",
-    name: "Energy infrastructure",
-    description: "Explore the assets and operating context that support energy generation and delivery.",
-    image: "https://images.unsplash.com/photo-1473341304170-9711a5a4d8c7?auto=format&fit=crop&w=1200&q=85",
-    alt: "Wind turbines in a wide landscape at sunset",
-    theme: "energy",
-  },
-  {
-    index: "03",
-    name: "Precious materials",
-    description: "Learn how provenance, custody, liquidity and market exposure shape precious-material assets.",
-    image: "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=1200&q=85",
-    alt: "Gold bars arranged under warm light",
-    theme: "materials",
-  },
+const services = [
+  { number: "01", name: "Beat sales & licensing", copy: "Find the right foundation for your song. Beat availability, license scope, and usage terms are confirmed before purchase.", icon: "◌" },
+  { number: "02", name: "Full music production", copy: "Develop a song from an idea into a complete production, shaped around your sound and creative direction.", icon: "✳" },
+  { number: "03", name: "Mixing & mastering", copy: "Bring balance, clarity, and a release-ready finish to your recorded tracks. Scope is quoted per project.", icon: "⌁" },
+  { number: "04", name: "Studio recording sessions", copy: "Book focused studio time for vocals and music recording, with session details agreed in advance.", icon: "◉" },
 ];
 
-const principles = [
-  ["01", "Show the source", "Every material claim should point to who supplied it, when it was reviewed and what evidence supports it."],
-  ["02", "Make risk legible", "Liquidity, concentration, operating and market risks belong beside the opportunity, in plain language."],
-  ["03", "Report with context", "Updates should separate verified facts, estimates and projections, with dates and methods clearly stated."],
+const quoteBands = [
+  ["Deluxe", "₦5,000–₦9,999"], ["Boss", "₦10,000–₦24,999"], ["Signature", "₦25,000–₦49,999"], ["Executive", "₦50,000–₦99,999"],
+  ["Prestige", "₦100,000–₦199,999"], ["Elite", "₦200,000–₦399,999"], ["Sovereign", "₦400,000–₦749,999"], ["Legacy", "₦750,000–₦1,000,000"],
 ];
-
-const briefingItems = [
-  { category: "LAND & FOOD", title: "What makes an agricultural asset resilient?", type: "Field guide", slug: "agricultural-resilience" },
-  { category: "ENERGY SYSTEMS", title: "Reading the infrastructure behind energy", type: "Explainer", slug: "energy-infrastructure" },
-  { category: "PRECIOUS MATERIALS", title: "Provenance, custody and the path of a material", type: "Due diligence", slug: "gold-provenance" },
-];
-
-function Arrow({ diagonal = false }: { diagonal?: boolean }) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" className="arrow-icon">
-      {diagonal ? <path d="M5 15 15 5M6 5h9v9" /> : <path d="M3 10h13m-5-5 5 5-5 5" />}
-    </svg>
-  );
-}
 
 function Brand() {
-  return <a className="brand" href="#top" aria-label="Veyora home"><span className="brand-mark">V</span><span>VEYORA<span className="brand-period">.</span></span></a>;
+  return <a className="brand" href="#top" aria-label="MajikMix Worldwide home"><span className="brand-mark">M</span><span>MAJIKMIX<span className="brand-period">.</span> WORLDWIDE</span></a>;
 }
 
-export default function Home({ memberMode = false }: { memberMode?: boolean }) {
+export default function Home({ memberMode = false }: { memberMode?: boolean } = {}) {
   return (
-    <main id="top">
-      <div className="notice-bar"><span className="notice-indicator" /> Veyora is an informational preview. Coin trading is coming soon and is not available yet.</div>
-      <header className="site-header">
+    <main className="music-site" id="top">
+      <style>{"\n.music-site{--music-paper:#f5f1e9;--music-ink:#20251f;--music-green:#174c39;--music-gold:#c7a768;background:var(--music-paper);color:var(--music-ink);font-family:Arial,Helvetica,sans-serif}\n.music-site .site-header{background:var(--music-paper);border-color:#ded8cb}.music-site .brand{font-size:12px;letter-spacing:.14em;color:#24372b}.music-site .brand-mark{background:#174c39}.music-site .desktop-nav{font-size:10px}.music-site .header-signup{background:#174c39}\n.music-hero{min-height:610px;position:relative;display:grid;grid-template-columns:47% 53%;align-items:center;gap:2%;padding:65px 7.2% 76px;overflow:hidden;background:#f5f1e9}.music-hero-copy{position:relative;z-index:1}.music-hero h1{margin:25px 0 20px;font:clamp(54px,7vw,88px)/.95 Georgia,serif;letter-spacing:-.06em;color:#20251f}.music-hero h1 em,.music-section h2 em,.music-process-band h2 em,.music-quote h2 em{color:#47775e;font-weight:400}.music-hero-copy>p{max-width:420px;color:#68756c;font-size:13px;line-height:1.85}.music-hero .hero-actions{margin-top:25px}.music-hero .button-primary{background:#174c39}.music-hero-art{min-height:455px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:9px;padding:28px;color:#f4ead5;background:linear-gradient(180deg,#13251f0a 30%,#13251fca 100%),url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1400&q=85') center/cover;border-radius:50% 50% 2px 2px / 34% 34% 2px 2px;box-shadow:0 24px 60px #19281c1f}.music-hero-art span,.music-hero-art strong{font-size:8px;letter-spacing:.18em}.music-hero-art strong{font-weight:500;color:#dbc487}.music-hero-meta{position:absolute;left:7.2%;right:7.2%;bottom:20px;display:flex;justify-content:space-between;gap:12px;color:#7b847c;font-size:7px;letter-spacing:.15em}.music-intro{min-height:140px;display:grid;grid-template-columns:1fr 2.5fr auto;align-items:center;gap:30px;padding:25px 10%;background:#ebe6da}.music-intro>span:first-child{font-size:8px;letter-spacing:.17em;color:#748076}.music-intro p{margin:0;color:#273c30;font:clamp(19px,2.3vw,27px)/1.35 Georgia,serif}.music-intro p strong{color:#778178;font-weight:400}.music-intro-mark{color:#d4c29b;font:italic 70px Georgia,serif}\n.music-section{padding:94px 10%}.music-section-heading{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:54px;margin-bottom:44px}.music-section h2,.music-process-band h2,.music-quote h2{margin:22px 0 0;font:clamp(42px,5.5vw,66px)/1 Georgia,serif;letter-spacing:-.055em}.music-section-heading>p{max-width:470px;margin:0 0 4px;color:#6b776e;font-size:11px;line-height:1.9}.music-service-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #d8d8cf;border-bottom:1px solid #d8d8cf}.music-service-card{min-height:250px;position:relative;padding:25px 20px 24px 0}.music-service-card+.music-service-card{padding-left:20px;border-left:1px solid #d8d8cf}.music-service-number{color:#969c92;font-size:8px;letter-spacing:.14em}.music-service-icon{position:absolute;top:20px;right:17px;color:#b89755;font:25px Georgia,serif}.music-service-card h3{margin:46px 0 11px;color:#243d2e;font:22px Georgia,serif;letter-spacing:-.03em}.music-service-card p{min-height:66px;margin:0;color:#727d74;font-size:9px;line-height:1.8}.music-service-card>a{display:inline-flex;gap:9px;margin-top:17px;color:#315c43;font-size:8px}.music-process-band{display:grid;grid-template-columns:1fr 1fr;gap:8%;padding:75px 10%;background:#153327;color:#f3efe5}.music-process-band .eyebrow-light,.music-quote .eyebrow-light{color:#ccd1c7}.music-process-band h2,.music-quote h2{color:#f3efe5}.music-process-band h2 em,.music-quote h2 em{color:#d2b86e}.music-process-band>div>p{max-width:440px;margin:20px 0 0;color:#c2cbc0;font-size:10px;line-height:1.9}.music-process-band ol{display:grid;align-content:center;margin:0;padding:0;list-style:none}.music-process-band li{display:flex;align-items:center;gap:18px;padding:18px 0;border-bottom:1px solid #ffffff2a}.music-process-band li>span{color:#d7bd76;font-size:9px}.music-process-band li strong,.music-process-band li small{display:block}.music-process-band li strong{font:18px Georgia,serif}.music-process-band li small{margin-top:5px;color:#c0c9bf;font-size:9px}.music-budgets{background:#eeece4}.music-budget-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #d8d8cf;border-left:1px solid #d8d8cf}.music-budget-card{min-height:138px;padding:18px;border-right:1px solid #d8d8cf;border-bottom:1px solid #d8d8cf;background:#f8f6f0}.music-budget-card>span{color:#a08b5d;font-size:7px;letter-spacing:.12em}.music-budget-card h3{margin:10px 0 7px;color:#294633;font:20px Georgia,serif}.music-budget-card strong,.music-budget-card small{display:block}.music-budget-card strong{color:#20251f;font-size:11px}.music-budget-card small{margin-top:7px;color:#858d84;font-size:7px}.music-quote{display:grid;grid-template-columns:1.25fr .75fr;gap:9%;align-items:center;padding:80px 10%;background:#10271d;color:#f5f1e8}.music-quote>div>p{max-width:620px;margin:20px 0 0;color:#c3ccc1;font-size:10px;line-height:1.9}.music-quote aside{padding:25px;border:1px solid #c8d0c333;background:#ffffff08;color:#e2e6dc;font-size:8px;letter-spacing:.12em;line-height:1.8}.quote-status-dot{width:7px;height:7px;display:inline-block;margin-right:9px;border-radius:50%;background:#d0b467}.music-quote aside p{margin:15px 0;color:#c2cbc1;font-size:10px;letter-spacing:0;line-height:1.8}.music-quote aside small{color:#d4c087;font-size:8px;letter-spacing:0}.music-footer .brand{color:#edf0e7}.music-footer .brand-mark{color:#e9d7a9}.music-footer .footer-main>div:first-child>p{margin-left:39px}.music-footer .footer-bottom{font-size:7px}\n@media(max-width:900px){.music-service-grid{grid-template-columns:repeat(2,1fr)}.music-service-card:nth-child(3){border-left:0;padding-left:0;border-top:1px solid #d8d8cf}.music-service-card:nth-child(4){border-top:1px solid #d8d8cf}.music-budget-card{padding:14px}}\n@media(max-width:680px){.music-hero{grid-template-columns:1fr;gap:25px;padding:45px 6% 65px}.music-hero h1{font-size:clamp(52px,13vw,72px)}.music-hero-art{min-height:330px;border-radius:48% 48% 2px 2px / 27% 27% 2px 2px}.music-hero-meta{left:6%;right:6%;font-size:6px}.music-hero-meta span:nth-child(2){display:none}.music-intro{grid-template-columns:1fr auto;gap:12px;padding:23px 7%}.music-intro>span:first-child{grid-column:1/-1}.music-intro-mark{font-size:52px}.music-section{padding:65px 7%}.music-section-heading{grid-template-columns:1fr;gap:18px;margin-bottom:30px}.music-section-heading>p{font-size:10px}.music-section h2,.music-process-band h2,.music-quote h2{font-size:48px}.music-service-grid{grid-template-columns:1fr}.music-service-card,.music-service-card+.music-service-card,.music-service-card:nth-child(3){min-height:190px;padding:21px 4px;border-left:0;border-top:1px solid #d8d8cf}.music-service-card:first-child{border-top:0}.music-service-card h3{margin-top:34px}.music-service-card p{min-height:0;max-width:440px}.music-process-band,.music-quote{grid-template-columns:1fr;gap:28px;padding:55px 7%}.music-budget-grid{grid-template-columns:repeat(2,1fr)}.music-budget-card{min-height:125px;padding:13px}.music-budget-card h3{font-size:18px}.music-footer .footer-main{grid-template-columns:1fr auto}.music-footer .footer-links{grid-column:1/-1;grid-row:2;justify-content:flex-start}.music-footer .footer-bottom span:last-child{display:none}}\n"}</style>
+      <div className="notice-bar"><span className="notice-indicator" /> Music services by MajikMix Worldwide · Online checkout is being prepared</div>
+      <header className="site-header music-header">
         <Brand />
-        {memberMode && <nav className="desktop-nav" aria-label="Main navigation">
-          <a href="#approach">Our approach</a>
-          <a href="#landscape">Asset landscape</a>
-          <a href="#briefing">Briefing</a>
-          <a href="#tasks">Tasks &amp; earn</a> <a href="#referrals">Referrals</a>
-        </nav>}
-        {memberMode ? <a className="header-link" href="/member">Member home <Arrow diagonal /></a> : <>
-          <a className="header-link" href="/auth?mode=signin">Sign in <Arrow diagonal /></a>
-          <a className="header-link header-signup" href="/auth?mode=signup">Sign up</a>
-          <a className="mobile-link" href="/auth?mode=signin">Sign in</a>
-          <a className="mobile-link mobile-signup" href="/auth?mode=signup">Sign up</a>
-        </>}
+        <nav className="desktop-nav" aria-label="Main navigation"><a href="#services">Services</a><a href="#process">How it works</a><a href="#budgets">Quote bands</a></nav>
+        <a className="header-link header-signup" href="#quote">Start a project</a>
       </header>
-
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-copy">
-          <div className="eyebrow"><span className="eyebrow-rule" /> REAL ASSETS. CLEARER CONTEXT.</div>
-          <h1 id="hero-title">Capital deserves<br />a <em>clearer view.</em></h1>
-          <p className="hero-lede">A research-first way to understand real-world assets, the systems around them and the risks that deserve your attention.</p>
-          <div className="hero-actions"><a className="button button-primary" href="#landscape">Explore the landscape <Arrow /></a><a className="quiet-link" href="#approach">How we think <Arrow diagonal /></a></div>
-          <div className="hero-caption"><span className="caption-mark">✳</span><span>Independent thinking begins<br /><strong>with better questions.</strong></span></div>
+      <section className="music-hero">
+        <div className="music-hero-copy">
+          <div className="eyebrow"><span className="eyebrow-rule" /> MUSIC PRODUCTION · NIGERIA</div>
+          <h1>Make the sound<br /><em>you hear.</em></h1>
+          <p>Beats, full music production, mixing, mastering, and studio recording—crafted around your song and your vision.</p>
+          <div className="hero-actions"><a className="button button-primary" href="#services">Explore services <span aria-hidden="true">↘</span></a><a className="quiet-link" href="#quote">Plan a project <span aria-hidden="true">↗</span></a></div>
+          <div className="hero-caption"><span className="caption-mark">✳</span><span>From the first idea<br /><strong>to the final master.</strong></span></div>
         </div>
-        <div className="hero-image" role="img" aria-label="Aerial view across a cultivated landscape at golden hour">
-          <div className="hero-image-shade" />
-          <div className="image-index">VEYORA FIELD NOTE <span>01 / 03</span></div>
-          <div className="image-caption"><span className="caption-line" /> LAND, SYSTEMS &amp; LONG-TERM THINKING</div>
-          <div className="image-coordinate">FIELD STUDY<br />INFORMATIONAL PREVIEW</div>
-          <span className="hero-image-ring" />
-        </div>
-        <div className="hero-meta"><span>INFORMATION FIRST</span><span>RISK IN VIEW</span><a href="#approach">SCROLL TO EXPLORE ↓</a></div>
+        <div className="music-hero-art" role="img" aria-label="Recording studio mixing console and music equipment"><span>MAJIKMIX WORLDWIDE</span><strong>RECORD · SHAPE · RELEASE</strong></div>
+        <div className="music-hero-meta"><span>BEATS &amp; PRODUCTION</span><span>MIXING &amp; MASTERING</span><a href="#services">SCROLL TO EXPLORE ↓</a></div>
       </section>
-
-      <BriefingTicker />
-
-      {!memberMode && <footer className="public-footer"><a href="/">VEYORA<span>.</span></a><a href="/privacy">Privacy &amp; cookies</a><span>INFORMATION BEFORE CAPITAL.</span></footer>}
-
-      {memberMode && <>
-      <section className="intro-band" id="approach">
-        <span className="section-index">01 / OUR APPROACH</span>
-        <p>Real-world assets are complex.<br /><strong>Understanding should not be.</strong></p>
-        <a href="#principles" aria-label="Read the Veyora principles"><Arrow diagonal /></a>
+      <section className="music-intro" id="process"><span>THE PROCESS</span><p>Good work starts with a clear brief.<br /><strong>Every track has its own story.</strong></p><span className="music-intro-mark">M</span></section>
+      <section className="music-section" id="services">
+        <div className="music-section-heading"><div><div className="eyebrow"><span className="eyebrow-rule" /> SERVICES</div><h2>Build your track<br /><em>your way.</em></h2></div><p>Choose the service that fits your project. Before any payment, agree on the deliverables, schedule, revisions, beat license, and final price in writing.</p></div>
+        <div className="music-service-grid">{services.map((service) => <article className="music-service-card" key={service.number}><span className="music-service-number">{service.number}</span><span className="music-service-icon" aria-hidden="true">{service.icon}</span><h3>{service.name}</h3><p>{service.copy}</p><a href="#quote">Discuss this service <span aria-hidden="true">↗</span></a></article>)}</div>
       </section>
-
-      <section className="principles section-shell" id="principles">
-        <div className="section-heading">
-          <div><div className="eyebrow"><span className="eyebrow-rule" /> A STANDARD TO WORK TOWARD</div><h2>Trust is built<br />in the <em>details.</em></h2></div>
-          <p>Veyora is being shaped around the information a careful decision requires: clear sources, honest risk context and reporting that explains what is known—and what is not.</p>
-        </div>
-        <div className="principle-grid">{principles.map(([number, title, body]) => <article className="principle-card" key={number}><span className="principle-number">{number}</span><span className="principle-icon" aria-hidden="true">{number === "01" ? "↗" : number === "02" ? "◉" : "⌁"}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
-        <p className="preview-note">These are product principles, not a representation that specific assets, controls or reporting services are currently available.</p>
+      <section className="music-process-band">
+        <div><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> A CLEAR PROJECT, STEP BY STEP</div><h2>Brief first.<br /><em>Then we make it.</em></h2><p>Tell the studio what you need, share reference tracks, and set a timeline. You’ll receive a written scope and quote before you pay.</p></div>
+        <ol><li><span>01</span><div><strong>Choose a service</strong><small>Beats, production, mix/master, or recording.</small></div></li><li><span>02</span><div><strong>Agree the scope</strong><small>Deliverables, license, revisions, and timing.</small></div></li><li><span>03</span><div><strong>Review your quote</strong><small>Final price and payment instructions in writing.</small></div></li></ol>
       </section>
-
-      <section className="landscape section-shell" id="landscape">
-        <div className="section-heading landscape-heading">
-          <div><div className="eyebrow"><span className="eyebrow-rule" /> EXPLORE BY ASSET CLASS</div><h2>Start with the<br /><em>real economy.</em></h2></div>
-          <p>Explore the systems connected to land, energy and materials. This overview is educational; it does not describe a live offering or an available investment.</p>
-        </div>
-        <div className="asset-grid">{opportunities.map((item) => <article className={`asset-card asset-${item.theme}`} key={item.index}>
-          <div className="asset-image" role="img" aria-label={item.alt} style={{ backgroundImage: `linear-gradient(180deg, #07130d08 30%, #07130dcc 100%), url("${item.image}")` }}><span className="asset-number">{item.index} / 03</span><span className="asset-tag">EDUCATIONAL OVERVIEW</span><span className="asset-orbit" /></div>
-          <div className="asset-body"><div><h3>{item.name}</h3><p>{item.description}</p><a className="asset-link" href="#due-diligence">Explore the context <Arrow /></a></div><span className="asset-arrow" aria-hidden="true"><Arrow diagonal /></span></div>
-        </article>)}</div>
+      <section className="music-section music-budgets" id="budgets">
+        <div className="music-section-heading"><div><div className="eyebrow"><span className="eyebrow-rule" /> PROJECT BUDGET GUIDE · NGN</div><h2>Find your<br /><em>starting range.</em></h2></div><p>Choose a planning range for your brief. These are budget bands, not fixed packages or a promise that every service is available at every amount. The studio confirms a final written quote before checkout.</p></div>
+        <div className="music-budget-grid">{quoteBands.map(([name, amount], index) => <article className="music-budget-card" key={name}><span>0{index + 1}</span><h3>{name}</h3><strong>{amount}</strong><small>Project budget guide</small></article>)}</div>
       </section>
-
-      <section className="due-diligence" id="due-diligence">
-        <div className="diligence-visual" role="img" aria-label="Sunlight over a mountain ridge" />
-        <div className="diligence-copy"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> BEFORE ANY DECISION</div><h2>Ask what sits<br />behind the <em>headline.</em></h2><p>A serious review looks beyond a category name. It asks who operates the asset, how value is assessed, what could interrupt performance and how an investor might exit.</p><div className="diligence-list"><div><span>01</span> Asset &amp; ownership</div><div><span>02</span> Operator &amp; counterparties</div><div><span>03</span> Valuation &amp; assumptions</div><div><span>04</span> Liquidity, fees &amp; exit</div></div><a className="button button-light" href="#risk">Our risk principles <Arrow /></a><div className="diligence-seal">CONTEXT<br /><span>BEFORE</span><br />CAPITAL</div></div>
+      <section className="music-quote" id="quote">
+        <div><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> PAYMENT STATUS</div><h2>Your sound.<br /><em>Your next move.</em></h2><p>Paystack checkout is not connected yet. Once your Paystack business account is verified and securely configured, approved quotes can be paid online. Eligible international card payments can show a cardholder’s converted amount; the charge and settlement currencies depend on your Paystack account settings.</p></div>
+        <aside><span className="quote-status-dot" /> CHECKOUT SETUP IN PROGRESS<p>Request a written quote before sending money. Beat licensing and production terms must be agreed for each project.</p><small>Crypto wallet payments are not enabled.</small></aside>
       </section>
-
-      <section className="briefing section-shell" id="briefing">
-        <div className="briefing-top"><div><div className="eyebrow"><span className="eyebrow-rule" /> THE VEYORA BRIEFING</div><h2>Information with<br /><em>the source attached.</em></h2></div><p>These member-only briefings are evergreen educational explainers with links to public sources. A live news feed is not connected.</p></div>
-        <div className="briefing-grid">{briefingItems.map((item, index) => <article className="briefing-card" key={item.title}><div className={`briefing-art briefing-art-${index + 1}`}><span>{item.category}</span><span className="briefing-glyph">{index === 0 ? "↗" : index === 1 ? "⌁" : "◈"}</span></div><div className="briefing-card-body"><div className="briefing-label"><span>{item.type}</span><span>EDUCATIONAL OVERVIEW</span></div><h3>{item.title}</h3><p>Open this source-linked guide for practical review questions and relevant public-source material.</p><a href={`/member/briefing/${item.slug}`} aria-label={`Read ${item.title}`}>Read briefing <Arrow /></a></div></article>)}</div>
-        <div className="briefing-foot"><span><i /> BRIEFINGS: EVERGREEN AND SOURCE-LINKED</span><span>LIVE NEWS FEED NOT CONNECTED</span></div>
-      </section>
-
-      <section className="tasks-section" id="tasks">
-        <div className="tasks-intro"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> MEMBER LEARNING PROGRAMME</div><h2>Learn first.<br /><em>Earn with clarity.</em></h2><p>Explore video, form and partner registration tasks. Cash rewards will appear only after the task provider and payout process are connected.</p><a className="button button-light" href="#task-activities">View task preview <Arrow /></a><div className="tasks-watermark" aria-hidden="true">V</div></div>
-        <TaskCenter />
-      </section>
-
-      <ReferralProgram /> <section className="risk-section" id="risk"><div className="risk-symbol">!</div><div className="risk-content"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> IMPORTANT INFORMATION</div><h2>Real opportunity<br />comes with <em>real risk.</em></h2><p>Investing involves risk, including possible loss of capital. Asset values can rise or fall, liquidity may be limited, and past performance does not predict future results. Nothing on this page is investment advice, an offer or a recommendation.</p><p>Veyora is an informational preview. No investment products are currently available through this site. Any future opportunity would require complete documentation, eligibility checks and review for the relevant jurisdiction.</p></div><div className="risk-aside"><span>READ BEFORE YOU ACT</span><div><span>Capital at risk</span><span>Returns not guaranteed</span><span>Terms vary by product</span></div><small>Informational preview only</small></div></section>
-
-      <footer className="site-footer"><div className="footer-main"><div><Brand /><p>A longer view of the real world.</p></div><div className="footer-links"><a href="#approach">Our approach</a><a href="#landscape">Asset landscape</a><a href="#briefing">Briefing</a><a href="#tasks">Tasks &amp; earn</a></div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 VEYORA. ALL RIGHTS RESERVED.</span><div><a href="#risk">Risk information</a><a href="/member">Member home</a></div><span>INFORMATION BEFORE CAPITAL.</span></div></footer>
-      </>}
+      <footer className="site-footer music-footer"><div className="footer-main"><div><Brand /><p>Sound made with intention.</p></div><div className="footer-links"><a href="#services">Services</a><a href="#process">How it works</a><a href="#budgets">Quote bands</a></div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 MAJIKMIX WORLDWIDE.</span><span>MUSIC SERVICES · NIGERIA</span></div></footer>
     </main>
   );
 }
