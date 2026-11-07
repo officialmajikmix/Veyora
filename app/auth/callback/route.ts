@@ -5,6 +5,8 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
+  const next = searchParams.get("next");
+  const destination = next === "/auth/reset-password" ? next : "/member";
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
@@ -19,7 +21,7 @@ export async function GET(request: NextRequest) {
       },
     });
     const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) return NextResponse.redirect(new URL("/member", origin));
+    if (!error) return NextResponse.redirect(new URL(destination, origin));
   }
 
   return NextResponse.redirect(new URL("/auth?error=confirmation", origin));
