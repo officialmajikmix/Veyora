@@ -63,7 +63,7 @@ export default function AuthPage() {
       const supabase = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!);
       if (mode === "recovery") {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: window.location.origin + "/auth/callback?next=%2Fauth%2Freset-password",
+          redirectTo: window.location.origin + "/auth/reset-password",
         });
         if (error) {
           setMessage(readableAuthError(error));
