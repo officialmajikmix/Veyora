@@ -3,6 +3,22 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { createBrowserClient } from "@supabase/ssr";
 
+function readableAuthError(error: unknown) {
+  if (typeof error === "string" && error.trim()) return error.trim();
+  if (error instanceof Error && error.message.trim()) return error.message.trim();
+  if (error && typeof error === "object") {
+    const details = error as Record<string, unknown>;
+    for (const key of ["message", "msg", "error_description"]) {
+      const value = details[key];
+      if (typeof value === "string" && value.trim()) return value.trim();
+    }
+    if (details.name === "AuthRetryableFetchError" || details.status === 0) {
+      return "Veyora could not reach the account service. Check your connection and try again.";
+    }
+  }
+  return "The account service returned no readable error. Please check Supabase Auth and SMTP settings, then try again.";
+}
+
 export default function AuthPage() {
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
@@ -22,21 +38,28 @@ export default function AuthPage() {
       setMessage("Account access is being connected. Please check back soon.");
       return;
     }
+
     setBusy(true);
-    const supabase = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!);
-    const result = mode === "signup"
-      ? await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + "/auth/callback" } })
-      : await supabase.auth.signInWithPassword({ email, password });
-    setBusy(false);
-    if (result.error) {
-      setMessage(result.error.message);
-      return;
+    try {
+      const supabase = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!);
+      const { data, error } = mode === "signup"
+        ? await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + "/auth/callback" } })
+        : await supabase.auth.signInWithPassword({ email, password });
+
+      if (error) {
+        setMessage(readableAuthError(error));
+        return;
+      }
+      if (mode === "signup" && !data.session) {
+        setMessage("Check your email to confirm your account, then sign in here.");
+        return;
+      }
+      window.location.assign("/member");
+    } catch (error) {
+      setMessage(readableAuthError(error));
+    } finally {
+      setBusy(false);
     }
-    if (mode === "signup" && !result.data.session) {
-      setMessage("Check your email to confirm your account, then sign in here.");
-      return;
-    }
-    window.location.assign("/member");
   }
 
   return (
