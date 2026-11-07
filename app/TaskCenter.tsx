@@ -12,6 +12,7 @@ export function TaskCenter() {
         <article className="task-row" key={task.id}><span className="task-index">0{index + 1}</span><div className="task-copy"><span>{task.label}</span><h4>{task.title}</h4><p>{task.detail}</p></div><div className="task-reward"><strong>{task.reward}</strong><span>not active yet</span></div><button type="button" className="task-action" disabled>Coming soon</button></article>
       ))}</div>
       <div className="task-foot"><span><i /> PARTNER INTEGRATION PREVIEW</span><span>No tasks or cash rewards are active.</span></div>
+      <p className="task-policy-note">Google ad clicks, standard ad views, and searches are not reward tasks. Any future ad-based reward must use a Google-approved rewarded format. Non-ad sponsor tasks require a verified provider and funded payout partner.</p>
     </div>
   );
 }
