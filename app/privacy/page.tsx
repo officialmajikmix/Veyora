@@ -29,15 +29,16 @@ export default function PrivacyPage() {
       <article className="policy-content">
         <div className="eyebrow"><span className="eyebrow-rule" /> PRIVACY &amp; COOKIES</div>
         <h1>Your information,<br /><em>clearly explained.</em></h1>
-        <p className="policy-updated">Last updated November 5, 2026</p>
-        <p>Veyora is an informational website. Email account registration and sign-in are active. Paid tasks, partner offers, payouts and advertising are not active.</p>
+        <p className="policy-updated">Last updated November 7, 2026</p>
+        <p>Veyora provides educational information and a member research-planning workspace. Email account registration and sign-in are active. Veyora does not currently provide investment products, trading, deposits, withdrawals, paid tasks, partner offers, payouts or advertising.</p>
 
         <h2>Website analytics</h2>
         <p>Veyora uses Vercel Web Analytics to understand aggregate page traffic, such as which pages are visited, referring pages, approximate location, browser and device type. Vercel describes this analytics product as using no third-party cookies and as collecting anonymous data for aggregated statistics; its visitor session identifier is discarded after 24 hours. Vercel may process request and deployment information to deliver and secure the website.</p>
         <p>Read <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noreferrer">Vercel’s Web Analytics privacy information</a> and <a href="https://vercel.com/legal/privacy-notice" target="_blank" rel="noreferrer">Vercel’s privacy notice</a> for details about its services.</p>
 
-        <h2>Accounts and task information</h2>
-        <p>Veyora uses Supabase Auth for email/password registration and sign-in. Supabase processes account email addresses, password credentials, confirmation status and authentication/session data to provide the service. Passwords are stored as hashes by Supabase Auth; Veyora does not receive or store plaintext passwords. See Supabase’s <a href="https://supabase.com/privacy" target="_blank" rel="noreferrer">privacy notice</a> and <a href="https://supabase.com/docs/guides/auth/password-security" target="_blank" rel="noreferrer">password security documentation</a>. Task submissions, partner offers and payout details are not currently collected.</p>
+        <h2>Accounts and planning information</h2>
+        <p>Veyora uses Supabase Auth for email/password registration and sign-in. Supabase processes account email addresses, password credentials, confirmation status and authentication/session data to provide the service. Passwords are stored as hashes by Supabase Auth; Veyora does not receive or store plaintext passwords. See Supabase’s <a href="https://supabase.com/privacy" target="_blank" rel="noreferrer">privacy notice</a> and <a href="https://supabase.com/docs/guides/auth/password-security" target="_blank" rel="noreferrer">password security documentation</a>.</p>
+        <p>If you use the member research-planning workspace, Veyora stores the asset area and due-diligence question you select, the plan status and timestamps in Supabase, linked to your account. Row-level access controls restrict each plan to its account owner. You can update or remove plans in the workspace. Do not put private financial details, wallet keys or account credentials into the planning workspace. Task submissions, partner offers and payout details are not currently collected.</p>
 
         <h2>Advertising and advertising cookies</h2>
         <p>Google advertising is not currently installed on Veyora. If advertising is added, Google and other advertising partners may use cookies or similar technologies to serve or measure ads, including ads based on a user’s visits to this site or other sites. Veyora will update this notice and provide any consent choices required for the locations where the site is available before enabling advertising.</p>
