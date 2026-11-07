@@ -4,19 +4,26 @@ import { useEffect, useState, type FormEvent } from "react";
 import { createBrowserClient } from "@supabase/ssr";
 
 function readableAuthError(error: unknown) {
-  if (typeof error === "string" && error.trim()) return error.trim();
-  if (error instanceof Error && error.message.trim()) return error.message.trim();
+  const clean = (value: unknown) => {
+    if (typeof value !== "string") return "";
+    const message = value.trim();
+    return message === "{}" || message === "[object Object]" ? "" : message;
+  };
+  const fallback = "Supabase returned no readable signup error. Check the Auth and email settings, then try again.";
+
+  if (typeof error === "string") return clean(error) || fallback;
+  if (error instanceof Error) return clean(error.message) || fallback;
   if (error && typeof error === "object") {
     const details = error as Record<string, unknown>;
-    for (const key of ["message", "msg", "error_description"]) {
-      const value = details[key];
-      if (typeof value === "string" && value.trim()) return value.trim();
+    for (const key of ["message", "msg", "error_description", "error"]) {
+      const message = clean(details[key]);
+      if (message) return message;
     }
     if (details.name === "AuthRetryableFetchError" || details.status === 0) {
       return "Veyora could not reach the account service. Check your connection and try again.";
     }
   }
-  return "The account service returned no readable error. Please check Supabase Auth and SMTP settings, then try again.";
+  return fallback;
 }
 
 export default function AuthPage() {
