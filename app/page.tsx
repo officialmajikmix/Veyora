@@ -56,7 +56,7 @@ function Brand() {
 export default function Home({ memberMode = false }: { memberMode?: boolean }) {
   return (
     <main id="top">
-      <div className="notice-bar"><span className="notice-indicator" /> Veyora is an informational preview. No investment products are currently available.</div>
+      <div className="notice-bar"><span className="notice-indicator" /> Veyora is an informational preview. Coin trading is coming soon and is not available yet.</div>
       <header className="site-header">
         <Brand />
         {memberMode && <nav className="desktop-nav" aria-label="Main navigation">
