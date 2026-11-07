@@ -36,9 +36,9 @@ const principles = [
 ];
 
 const briefingItems = [
-  { category: "LAND & FOOD", title: "What makes an agricultural asset resilient?", type: "Field guide" },
-  { category: "ENERGY SYSTEMS", title: "Reading the infrastructure behind energy", type: "Explainer" },
-  { category: "PRECIOUS MATERIALS", title: "Provenance, custody and the path of a material", type: "Due diligence" },
+  { category: "LAND & FOOD", title: "What makes an agricultural asset resilient?", type: "Field guide", slug: "agricultural-resilience" },
+  { category: "ENERGY SYSTEMS", title: "Reading the infrastructure behind energy", type: "Explainer", slug: "energy-infrastructure" },
+  { category: "PRECIOUS MATERIALS", title: "Provenance, custody and the path of a material", type: "Due diligence", slug: "gold-provenance" },
 ];
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
@@ -128,9 +128,9 @@ export default function Home({ memberMode = false }: { memberMode?: boolean }) {
       </section>
 
       <section className="briefing section-shell" id="briefing">
-        <div className="briefing-top"><div><div className="eyebrow"><span className="eyebrow-rule" /> THE VEYORA BRIEFING</div><h2>Information with<br /><em>the source attached.</em></h2></div><p>News and explainers should carry a publication date, a direct source and clear labels for fact, analysis and opinion. The feed below is a design preview; live editorial sources are not connected.</p></div>
-        <div className="briefing-grid">{briefingItems.map((item, index) => <article className="briefing-card" key={item.title}><div className={`briefing-art briefing-art-${index + 1}`}><span>{item.category}</span><span className="briefing-glyph">{index === 0 ? "↗" : index === 1 ? "⌁" : "◈"}</span></div><div className="briefing-card-body"><div className="briefing-label"><span>{item.type}</span><span>EDITORIAL PREVIEW</span></div><h3>{item.title}</h3><p>Preview topic. A published item will include a date, author, source link and relevant context.</p><a href="#briefing" aria-label={`Read ${item.title} when published`}>Read briefing <Arrow /></a></div></article>)}</div>
-        <div className="briefing-foot"><span><i /> FEED STATUS: PREVIEW ONLY</span><span>SOURCE-LINKED UPDATES WILL APPEAR HERE</span></div>
+        <div className="briefing-top"><div><div className="eyebrow"><span className="eyebrow-rule" /> THE VEYORA BRIEFING</div><h2>Information with<br /><em>the source attached.</em></h2></div><p>These member-only briefings are evergreen educational explainers with links to public sources. A live news feed is not connected.</p></div>
+        <div className="briefing-grid">{briefingItems.map((item, index) => <article className="briefing-card" key={item.title}><div className={`briefing-art briefing-art-${index + 1}`}><span>{item.category}</span><span className="briefing-glyph">{index === 0 ? "↗" : index === 1 ? "⌁" : "◈"}</span></div><div className="briefing-card-body"><div className="briefing-label"><span>{item.type}</span><span>EDUCATIONAL OVERVIEW</span></div><h3>{item.title}</h3><p>Open this source-linked guide for practical review questions and relevant public-source material.</p><a href={`/member/briefing/${item.slug}`} aria-label={`Read ${item.title}`}>Read briefing <Arrow /></a></div></article>)}</div>
+        <div className="briefing-foot"><span><i /> BRIEFINGS: EVERGREEN AND SOURCE-LINKED</span><span>LIVE NEWS FEED NOT CONNECTED</span></div>
       </section>
 
       <section className="tasks-section" id="tasks">
