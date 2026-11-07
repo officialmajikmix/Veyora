@@ -63,7 +63,7 @@ export default function Home({ memberMode = false }: { memberMode?: boolean }) {
           <a href="#approach">Our approach</a>
           <a href="#landscape">Asset landscape</a>
           <a href="#briefing">Briefing</a>
-          <a href="#tasks">Tasks &amp; earn</a>
+          <a href="#tasks">Tasks &amp; earn</a> <a href="#referrals">Referrals</a>
         </nav>}
         {memberMode ? <a className="header-link" href="/member">Member home <Arrow diagonal /></a> : <>
           <a className="header-link" href="/auth?mode=signin">Sign in <Arrow diagonal /></a>
@@ -138,7 +138,7 @@ export default function Home({ memberMode = false }: { memberMode?: boolean }) {
         <TaskCenter />
       </section>
 
-      <section className="risk-section" id="risk"><div className="risk-symbol">!</div><div className="risk-content"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> IMPORTANT INFORMATION</div><h2>Real opportunity<br />comes with <em>real risk.</em></h2><p>Investing involves risk, including possible loss of capital. Asset values can rise or fall, liquidity may be limited, and past performance does not predict future results. Nothing on this page is investment advice, an offer or a recommendation.</p><p>Veyora is an informational preview. No investment products are currently available through this site. Any future opportunity would require complete documentation, eligibility checks and review for the relevant jurisdiction.</p></div><div className="risk-aside"><span>READ BEFORE YOU ACT</span><div><span>Capital at risk</span><span>Returns not guaranteed</span><span>Terms vary by product</span></div><small>Informational preview only</small></div></section>
+      <ReferralProgram /> <section className="risk-section" id="risk"><div className="risk-symbol">!</div><div className="risk-content"><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> IMPORTANT INFORMATION</div><h2>Real opportunity<br />comes with <em>real risk.</em></h2><p>Investing involves risk, including possible loss of capital. Asset values can rise or fall, liquidity may be limited, and past performance does not predict future results. Nothing on this page is investment advice, an offer or a recommendation.</p><p>Veyora is an informational preview. No investment products are currently available through this site. Any future opportunity would require complete documentation, eligibility checks and review for the relevant jurisdiction.</p></div><div className="risk-aside"><span>READ BEFORE YOU ACT</span><div><span>Capital at risk</span><span>Returns not guaranteed</span><span>Terms vary by product</span></div><small>Informational preview only</small></div></section>
 
       <footer className="site-footer"><div className="footer-main"><div><Brand /><p>A longer view of the real world.</p></div><div className="footer-links"><a href="#approach">Our approach</a><a href="#landscape">Asset landscape</a><a href="#briefing">Briefing</a><a href="#tasks">Tasks &amp; earn</a></div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 VEYORA. ALL RIGHTS RESERVED.</span><div><a href="#risk">Risk information</a><a href="/member">Member home</a></div><span>INFORMATION BEFORE CAPITAL.</span></div></footer>
       </>}
