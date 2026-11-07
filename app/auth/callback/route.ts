@@ -10,6 +10,12 @@ export async function GET(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
+  if (code && destination === "/auth/reset-password") {
+    const resetUrl = new URL(destination, origin);
+    resetUrl.searchParams.set("code", code);
+    return NextResponse.redirect(resetUrl);
+  }
+
   if (code && url && key) {
     const cookieStore = await cookies();
     const supabase = createServerClient(url, key, {
