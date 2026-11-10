@@ -492,6 +492,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid #bd9b57; outline-offs
 .music-video-empty { width:min(720px,86vw); min-height:190px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:12px; scroll-snap-align:start; }
 .music-video-empty p { max-width:540px; }
 .music-video-empty a { color:#315c43; font-size:10px; }
+.music-site .music-video-teasers { width:max-content; }
+.music-video-teaser { flex:0 0 min(440px,84vw); overflow:hidden; background:#f8f6f0; border:1px solid #d8d8cf; scroll-snap-align:start; }
+.music-video-teaser>div:last-child { padding:16px; }.music-video-teaser>div:last-child>span { color:#9b8252;font-size:8px;letter-spacing:.15em; }.music-video-teaser h3 { margin:8px 0 0;color:#294633;font:22px Georgia,serif; }
+.video-teaser-art { aspect-ratio:16/9;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:20px;color:#efe8d3;background:radial-gradient(ellipse at 72% 28%,#d7bd7655,transparent 35%),linear-gradient(135deg,#273f31,#111c17 68%,#46503c); }
+.music-video-teaser:nth-child(2) .video-teaser-art { background:radial-gradient(ellipse at 30% 35%,#a8794f77,transparent 36%),linear-gradient(135deg,#352b24,#151c18 70%,#6a5736); }
+.music-video-teaser:nth-child(3) .video-teaser-art { background:radial-gradient(ellipse at 74% 55%,#477c8277,transparent 38%),linear-gradient(135deg,#22373a,#151c18 70%,#394c42); }
+.video-teaser-art span,.video-teaser-art small { color:#d9c687;font-size:7px;letter-spacing:.17em; }.video-teaser-art strong { max-width:80%;font:clamp(24px,4vw,42px) Georgia,serif; }.video-teaser-art i { align-self:center;color:#f1d787;font-size:22px;font-style:normal;text-shadow:0 2px 15px #0008; }
 .music-shelf-note { margin:13px 0 0; color:#727d74; font-size:9px; line-height:1.7; }
 .music-sketch-card { background:radial-gradient(ellipse at 80% 0%,#d7c58a44,transparent 45%),#17372a; border-color:#17372a; color:#f3efe5; }
 .music-sketch-card h3,.music-sketch-card strong { color:#f3efe5; }
