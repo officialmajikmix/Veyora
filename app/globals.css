@@ -524,7 +524,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #bd9b57; outline-offs
 .library-audio-card h4 { margin:7px 0;color:#294633;font:20px Georgia,serif; }
 .library-audio-card p { margin:6px 0;color:#727d74;font-size:10px;line-height:1.7; }
 .library-audio-card small { color:#777f75;font-size:8px;line-height:1.6; }
-.library-audio-card audio { width:100%;height:38px; }
+.stream-audio-player { display:grid;gap:8px; }.stream-audio-player audio { width:100%;height:38px; }.stream-play-button { justify-self:start;min-height:38px;padding:0 14px;border:0;background:#174c39;color:#f4f1e8;font-size:10px;cursor:pointer; }.stream-play-button:hover { background:#285e46; }
 .library-download { justify-self:start;padding:11px 14px;background:#174c39;color:#f4f1e8;font-size:9px;text-decoration:none; }
 .library-empty { min-height:124px;display:flex;align-items:center;margin:0;padding:20px;border:1px dashed #c9c4b6;background:#f5f1e9;color:#667268;font:17px/1.5 Georgia,serif; }
 .artist-link-card { display:grid;grid-template-columns:1fr auto;gap:6px 15px;align-items:center;padding:16px;background:#f5f1e9;border:1px solid #e3ded2;color:#294633;text-decoration:none; }
