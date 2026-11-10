@@ -401,3 +401,38 @@ a:focus-visible, button:focus-visible { outline: 2px solid #bd9b57; outline-offs
 .payment-reference { overflow-wrap: anywhere; font-size: 9px!important; }
 .payment-result-retry { margin: 12px 10px 10px 0; background: #174c39; color: #f4f1e8; }
 .payment-result-home { display: inline-block; margin-top: 12px; color: #315c43; font-size: 11px; }
+
+.growth-hub { padding: 88px 10%; background: #f5f1e9; color: #20251f; }
+.growth-heading { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 54px; margin-bottom: 38px; }
+.growth-heading h2 { margin: 22px 0 0; color: #243d2e; font: clamp(42px, 5.5vw, 66px)/1 Georgia, serif; letter-spacing: -.055em; }
+.growth-heading h2 em { color: #47775e; font-weight: 400; }
+.growth-heading>p { max-width: 470px; margin: 0 0 4px; color: #6b776e; font-size: 11px; line-height: 1.9; }
+.growth-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; }
+.growth-share-panel,.growth-program-panel { min-width: 0; padding: 28px; border: 1px solid #ded8cb; background: #fffdf8; }
+.growth-kicker { color: #9b8252; font-size: 8px; letter-spacing: .15em; }
+.growth-share-panel h3,.growth-program-panel h3,.campaign-card h3 { margin: 15px 0 18px; color: #294633; font: 27px/1.16 Georgia, serif; letter-spacing: -.025em; }
+.growth-actions { border-top: 1px solid #e2ded4; }
+.growth-action { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 16px 0; border-bottom: 1px solid #e2ded4; }
+.growth-action h4 { margin: 0 0 5px; color: #294633; font: 17px Georgia, serif; }
+.growth-action p,.growth-program-panel>p,.campaign-card p { margin: 0; color: #727d74; font-size: 9px; line-height: 1.75; }
+.growth-action button { flex: 0 0 auto; min-height: 37px; padding: 0 12px; border: 1px solid #cfd4c9; background: transparent; color: #315c43; font-size: 9px; cursor: pointer; }
+.growth-action button:hover { border-color: #174c39; background: #174c39; color: #fff; }
+.growth-status { min-height: 1.5em; margin: 13px 0 0; color: #315c43; font-size: 9px; }
+.growth-program-panel { background: #17372a; border-color: #17372a; color: #f4f1e8; }
+.growth-program-panel h3 { margin-bottom: 14px; color: #f4f1e8; font-size: 31px; }
+.growth-program-panel h3 em { color: #d2b86e; font-weight: 400; }
+.growth-program-panel>p { color: #c4cec2; font-size: 10px; }
+.growth-reward-note { display: grid; grid-template-columns: 30px 1fr; gap: 5px 12px; align-items: center; margin: 23px 0 18px; padding: 15px; border: 1px solid #ffffff29; background: #ffffff08; }
+.growth-reward-note>span:first-child { grid-row: span 2; color: #d2b86e; font-size: 9px; }
+.growth-reward-note>span:nth-child(2) { color: #c4cec2; font-size: 8px; }
+.growth-reward-note strong { color: #f4f1e8; font: 18px Georgia, serif; }
+.growth-program-panel .growth-policy { color: #d2c79f; font-size: 8px; }
+.campaign-card { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px 32px; align-items: center; margin-top: 16px; padding: 28px; border: 1px solid #ded8cb; background: #ebe6da; }
+.campaign-card h3 { max-width: 480px; margin-bottom: 10px; }
+.campaign-card p { max-width: 530px; }
+.campaign-steps { display: grid; gap: 9px; }
+.campaign-steps span { display: flex; align-items: center; gap: 12px; color: #40584a; font: 16px Georgia, serif; }
+.campaign-steps b { color: #9b8252; font: 8px Arial, sans-serif; }
+.campaign-card .campaign-policy { grid-column: 1/-1; max-width: none; padding-top: 14px; border-top: 1px solid #d6d0c4; color: #72766c; font-size: 8px; }
+@media (max-width: 800px) { .growth-heading,.growth-grid,.campaign-card { grid-template-columns: 1fr; } .growth-heading { gap: 18px; } .campaign-card .campaign-policy { grid-column: auto; } }
+@media (max-width: 680px) { .growth-hub { padding: 65px 7%; } .growth-share-panel,.growth-program-panel,.campaign-card { padding: 21px; } .growth-action { align-items: flex-start; } .growth-action h4 { font-size: 16px; } .growth-action button { padding: 0 8px; } }

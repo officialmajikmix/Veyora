@@ -1,5 +1,6 @@
 import { StudioMotion } from "./StudioMotion";
 import { CheckoutForm } from "./CheckoutForm";
+import { GrowthHub } from "./GrowthHub";
 
 const services = [
   { number: "01", name: "Beat sales & licensing", copy: "Find the right foundation for your song. Beat availability, license scope, and usage terms are confirmed before purchase.", icon: "◌" },
@@ -85,6 +86,7 @@ export default function Home({ memberMode = false }: { memberMode?: boolean } = 
         </div>
         <p className="music-shop-note">The digital catalog and online checkout are being prepared. Ask for current availability and a written invoice before paying.</p>
       </section>
+      <GrowthHub />
       <section className="music-process-band">
         <div><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> A CLEAR PROJECT, STEP BY STEP</div><h2>Brief first.<br /><em>Then we make it.</em></h2><p>Tell the studio what you need, share reference tracks, and set a timeline. You’ll receive a written scope and quote before you pay.</p></div>
         <ol><li><span>01</span><div><strong>Choose a service</strong><small>Beats, production, mix/master, or recording.</small></div></li><li><span>02</span><div><strong>Agree the scope</strong><small>Deliverables, license, revisions, and timing.</small></div></li><li><span>03</span><div><strong>Review your quote</strong><small>Final price and payment instructions in writing.</small></div></li></ol>
