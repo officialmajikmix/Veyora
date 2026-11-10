@@ -2,13 +2,14 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import { createBrowserClient } from "@supabase/ssr";
-import type { ArtistLink, AudioItem } from "../../mediaCatalog";
+import type { ArtistLink, AudioItem, VideoSubmission } from "../../mediaCatalog";
 
 const audioTypes = new Set(["audio/mpeg", "audio/mp4", "audio/aac", "audio/wav", "audio/x-wav", "audio/flac", "audio/ogg"]);
 
-export function MediaManager({ audio: initialAudio, artists: initialArtists }: { audio: AudioItem[]; artists: ArtistLink[] }) {
+export function MediaManager({ audio: initialAudio, artists: initialArtists, submissions: initialSubmissions }: { audio: AudioItem[]; artists: ArtistLink[]; submissions: VideoSubmission[] }) {
   const [audio, setAudio] = useState(initialAudio);
   const [artists, setArtists] = useState(initialArtists);
+  const [submissions, setSubmissions] = useState(initialSubmissions);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const supabase = useMemo(() => process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
@@ -65,6 +66,27 @@ export function MediaManager({ audio: initialAudio, artists: initialArtists }: {
     setBusy(false); setMessage(error?.message ?? "Artist link removed.");
   }
 
+  async function reviewVideo(item: VideoSubmission, action: "publish" | "reject") {
+    if (!supabase) return;
+    if (action === "reject" && !window.confirm(`Mark “${item.song_title}” as needing changes? It will remain private.`)) return;
+    setBusy(true); setMessage("");
+    if (action === "reject") {
+      const { error } = await supabase.from("artist_videos").update({ status: "rejected" }).eq("id", item.id);
+      if (!error) setSubmissions((items) => items.map((row) => row.id === item.id ? { ...row, status: "rejected" } : row));
+      setBusy(false); setMessage(error?.message ?? "Video marked as needing changes."); return;
+    }
+    const { data: source, error: downloadError } = await supabase.storage.from("majikmix-video-submissions").download(item.submission_path);
+    if (downloadError || !source) { setBusy(false); return setMessage(downloadError?.message ?? "Unable to access the private video submission."); }
+    const extension = item.submission_path.split(".").at(-1)?.toLowerCase() ?? "mp4";
+    const publicPath = `${item.id}/${crypto.randomUUID()}.${extension}`;
+    const { error: publishError } = await supabase.storage.from("majikmix-videos").upload(publicPath, source, { contentType: source.type || "video/mp4", upsert: false });
+    if (publishError) { setBusy(false); return setMessage(publishError.message); }
+    const { error } = await supabase.from("artist_videos").update({ status: "published", public_storage_path: publicPath }).eq("id", item.id);
+    if (error) { await supabase.storage.from("majikmix-videos").remove([publicPath]); setBusy(false); return setMessage(error.message); }
+    setSubmissions((items) => items.map((row) => row.id === item.id ? { ...row, status: "published", public_storage_path: publicPath } : row));
+    setBusy(false); setMessage("Video approved and added to the public artist feed.");
+  }
+
   return <>
     <div className="media-admin-grid">
       <section><h2>Publish audio</h2><p>Maximum 50 MB per file. Only publish audio you own or have permission to distribute.</p>
@@ -85,5 +107,6 @@ export function MediaManager({ audio: initialAudio, artists: initialArtists }: {
     <p className="media-admin-status" role="status" aria-live="polite">{message}</p>
     <section className="media-admin-list"><h2>Published audio</h2>{audio.length ? audio.map((item) => <article key={item.id}><div><strong>{item.title}</strong><span>{item.artist} · {item.copyright_notice}</span></div><button type="button" disabled={busy} onClick={() => removeAudio(item)}>Remove</button></article>) : <p>No public audio yet.</p>}</section>
     <section className="media-admin-list"><h2>Artist links</h2>{artists.length ? artists.map((item) => <article key={item.id}><div><strong>{item.artist}</strong><span>{item.platform} · {item.url}</span></div><button type="button" disabled={busy} onClick={() => removeArtist(item)}>Remove</button></article>) : <p>No public artist links yet.</p>}</section>
+    <section className="media-admin-list"><h2>Artist video review</h2>{submissions.length ? submissions.map((item) => <article className="video-review-row" key={item.id}><div><strong>{item.song_title} · {item.artist}</strong><span>{item.caption || "No caption"} · {item.audio_origin === "original" ? "Original audio" : item.streaming_url}</span><span>Review status: {item.status}</span></div>{item.status === "pending" && <div className="video-review-actions"><button type="button" disabled={busy} onClick={() => reviewVideo(item, "publish")}>Approve & publish</button><button type="button" disabled={busy} onClick={() => reviewVideo(item, "reject")}>Needs changes</button></div>}</article>) : <p>No artist video submissions yet.</p>}</section>
   </>;
 }

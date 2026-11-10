@@ -21,5 +21,6 @@ export default async function AdminMediaPage() {
   if (!data?.claims) redirect("/auth?next=%2Fadmin%2Fmedia");
   if (!isMajikMixAdmin(data.claims)) return <main className="media-admin"><p>Your signed-in account does not have the Majik Mix administrator role.</p><a href="/">Return to Majik Mix</a></main>;
   const catalog = await getMediaCatalog();
-  return <main className="media-admin"><header><a href="/">← Majik Mix</a><p className="eyebrow">MAJIK MIX · ADMIN</p><h1>Media library</h1><p>Upload audio that Majik Mix owns or is licensed to distribute. Published files can be downloaded by anyone.</p></header><MediaManager audio={catalog.audio} artists={catalog.artists} /></main>;
+  const { data: videoData } = await supabase.from("artist_videos").select("id,artist_user_id,artist,song_title,caption,audio_origin,streaming_url,submission_path,public_storage_path,status,created_at").order("created_at", { ascending: false });
+  return <main className="media-admin"><header><a href="/">← Majik Mix</a><p className="eyebrow">MAJIK MIX · ADMIN</p><h1>Media library</h1><p>Upload audio that Majik Mix owns or is licensed to distribute. Published files can be downloaded by anyone. Artist videos remain private until you review and approve them.</p></header><MediaManager audio={catalog.audio} artists={catalog.artists} submissions={(videoData ?? []) as import("../../mediaCatalog").VideoSubmission[]} /></main>;
 }
