@@ -35,6 +35,7 @@ export function ArtistVideoUpload({ userId }: { userId: string }) {
       caption: String(form.get("caption") ?? "").trim(),
       audio_origin: origin,
       streaming_url: origin === "catalogue" ? streamingUrl : null,
+      visibility: String(form.get("visibility") ?? "public"),
       submission_path: path,
       status: "pending",
     };
@@ -53,6 +54,7 @@ export function ArtistVideoUpload({ userId }: { userId: string }) {
         <select name="audio_origin" defaultValue="catalogue"><option value="catalogue">The song is in a streaming store</option><option value="original">Original audio — not released in a store</option></select>
       </label>
       <label>Official song or artist streaming link<input name="streaming_url" type="url" placeholder="https://…" /></label>
+      <label>After review, who can watch this video?<select name="visibility" defaultValue="public"><option value="public">Public — show in the Videos section</option><option value="private">Private — only I can view it in my dashboard</option></select></label>
       <label>Video file<input name="video" type="file" accept="video/mp4,video/webm,video/quicktime,.mp4,.webm,.mov" required /></label>
       <label className="media-admin-check"><input name="rights" type="checkbox" required /> I created this video or have permission to submit it, and I have the rights needed to use the song/audio in it.</label>
       <button type="submit" disabled={busy}>{busy ? "Uploading…" : "Submit video for review"}</button>
