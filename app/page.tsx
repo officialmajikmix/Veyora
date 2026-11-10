@@ -3,8 +3,10 @@ import { CheckoutForm } from "./CheckoutForm";
 import { GrowthHub } from "./GrowthHub";
 import { AnimatedMixer } from "./AnimatedMixer";
 import { AccountControls } from "./AccountControls";
-import { getSignedInState } from "./authState";
+import { getAuthState } from "./authState";
 import { BeatSketchPlayer } from "./BeatSketchPlayer";
+import { getMediaCatalog } from "./mediaCatalog";
+import { MediaLibrary } from "./MediaLibrary";
 
 const services = [
   { number: "01", name: "Beat sales & licensing", copy: "Find the right foundation for your song. Beat availability, license scope, and usage terms are confirmed before purchase.", icon: "◌" },
@@ -48,7 +50,7 @@ function Brand() {
 }
 
 export default async function Home({ memberMode = false }: { memberMode?: boolean } = {}) {
-  const signedIn = await getSignedInState();
+  const [{ signedIn, isAdmin }, catalog] = await Promise.all([getAuthState(), getMediaCatalog()]);
   return (
     <main className="music-site" id="top">
       <StudioMotion />
@@ -56,10 +58,10 @@ export default async function Home({ memberMode = false }: { memberMode?: boolea
       <div className="notice-bar"><span className="notice-indicator" /> Music services by Majik Mix · Online checkout is being prepared</div>
       <header className="site-header music-header">
         <Brand />
-        <nav className="desktop-nav" aria-label="Main navigation"><a href="#services">Services</a><a href="#beats">Beats</a><a href="#videos">Videos</a><a href="#shop">Shop</a><a href="#community">Community</a></nav>
+        <nav className="desktop-nav" aria-label="Main navigation"><a href="#services">Services</a><a href="#beats">Beats</a><a href="#videos">Videos</a><a href="#library">Downloads</a><a href="#shop">Shop</a><a href="#community">Community</a></nav>
         <div className="header-account"><AccountControls /><a className="header-link header-signup" href="#quote">Start a project</a></div>
       </header>
-      <nav className="section-index" aria-label="Explore website sections"><a href="#services">01 Services</a><a href="#beats">02 Beat previews</a><a href="#videos">03 Video</a><a href="#shop">04 Digital shop</a><a href="#community">05 Community</a><a href="#process">06 Process</a><a href="#budgets">07 Pricing</a><a href="#quote">08 Payment</a></nav>
+      <nav className="section-index" aria-label="Explore website sections"><a href="#services">01 Services</a><a href="#beats">02 Beat previews</a><a href="#videos">03 Video</a><a href="#library">04 Downloads & artists</a><a href="#shop">05 Digital shop</a><a href="#community">06 Community</a><a href="#process">07 Process</a><a href="#budgets">08 Pricing</a><a href="#quote">09 Payment</a>{isAdmin && <a href="/admin/media">Admin media ↗</a>}</nav>
       <section className="music-hero">
         <AnimatedMixer />
         <div className="music-hero-copy">
@@ -85,6 +87,7 @@ export default async function Home({ memberMode = false }: { memberMode?: boolea
         <div className="music-section-heading"><div><div className="eyebrow"><span className="eyebrow-rule" /> VIDEO SHOWCASE</div><h2>Watch the<br /><em>sound take shape.</em></h2></div><p>Watch studio sessions, performance clips, and beat previews from Majik Mix.</p></div>
         <div className="music-video-shelf" aria-label="Scrollable studio video previews">{videoSamples.length > 0 ? <div className="music-video-grid">{videoSamples.map((video) => <article className="music-video-card" key={video.title}><video controls playsInline preload="metadata" src={video.videoUrl} aria-label={`Play ${video.title}`} /><div><span>{video.category}</span><h3>{video.title}</h3></div></article>)}</div> : <div className="music-video-grid music-video-teasers">{[["STUDIO SESSIONS", "Inside the room", "01"], ["BEAT BREAKDOWNS", "From drums to groove", "02"], ["ARTIST STORIES", "Made together", "03"]].map(([category, title, number]) => <article className="music-video-teaser" key={category}><div className="video-teaser-art"><span>MAJIK MIX · {number}</span><strong>{title}</strong><i>▶</i><small>VIDEO CLIPS COMING SOON</small></div><div><span>{category}</span><h3>{title}</h3></div></article>)}</div>}</div>
       </section>
+      <MediaLibrary audio={catalog.audio} artists={catalog.artists} storageUrl={catalog.storageUrl} />
       <section className="music-section music-shop-section" id="shop">
         <div className="music-section-heading"><div><div className="eyebrow"><span className="eyebrow-rule" /> DIGITAL SHOP</div><h2>Tools for your<br /><em>next sound.</em></h2></div><p>Browse digital products from Majik Mix. Product details, formats, compatibility, license terms, and prices will be confirmed before checkout.</p></div>
         <div className="music-shop-grid">
@@ -106,7 +109,7 @@ export default async function Home({ memberMode = false }: { memberMode?: boolea
         <div><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> PAYMENT STATUS</div><h2>Your sound.<br /><em>Your next move.</em></h2><p>Suggested payment schedule: 50% deposit to reserve production or live-instrument sessions, with the balance due before delivery of final masters. Recording-only bookings are paid before the session. A written invoice will confirm the scope and payment details. Online checkout is still being configured.</p></div>
         <CheckoutForm enabled={Boolean(process.env.PAYSTACK_SECRET_KEY)} />
       </section>
-      <footer className="site-footer music-footer"><div className="footer-main"><div><Brand /><p>Sound made with intention.</p></div><div className="footer-links"><a href="#services">Services</a><a href="#shop">Digital shop</a><a href="#community">Community</a><a href="#process">How it works</a><a href="#budgets">Starting prices</a><a href="#videos">Videos</a><a href="/auth">Sign in</a><a href="/member">My account</a></div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 MAJIK MIX.</span><span>MUSIC SERVICES · NIGERIA</span></div></footer>
+      <footer className="site-footer music-footer"><div className="footer-main"><div><Brand /><p>Sound made with intention.</p></div><div className="footer-links"><a href="#services">Services</a><a href="#library">Audio & artists</a><a href="#shop">Digital shop</a><a href="#community">Community</a><a href="#process">How it works</a><a href="#budgets">Starting prices</a><a href="#videos">Videos</a><a href="/auth">Sign in</a><a href="/member">My account</a>{isAdmin && <a href="/admin/media">Admin media</a>}</div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 MAJIK MIX.</span><span>MUSIC SERVICES · NIGERIA</span></div></footer>
     </main>
   );
 }
