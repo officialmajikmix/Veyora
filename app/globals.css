@@ -436,3 +436,50 @@ a:focus-visible, button:focus-visible { outline: 2px solid #bd9b57; outline-offs
 .campaign-card .campaign-policy { grid-column: 1/-1; max-width: none; padding-top: 14px; border-top: 1px solid #d6d0c4; color: #72766c; font-size: 8px; }
 @media (max-width: 800px) { .growth-heading,.growth-grid,.campaign-card { grid-template-columns: 1fr; } .growth-heading { gap: 18px; } .campaign-card .campaign-policy { grid-column: auto; } }
 @media (max-width: 680px) { .growth-hub { padding: 65px 7%; } .growth-share-panel,.growth-program-panel,.campaign-card { padding: 21px; } .growth-action { align-items: flex-start; } .growth-action h4 { font-size: 16px; } .growth-action button { padding: 0 8px; } }
+
+/* Full-viewport Majik Mix mixer artwork and account navigation */
+.music-site .music-header { position: relative; z-index: 10; }
+.header-account,.account-signed-in { display: flex; align-items: center; justify-content: flex-end; gap: 15px; }
+.header-account { flex: 0 0 auto; }
+.account-control,.account-signout { color: #315c43; font-size: 10px; text-decoration: none; white-space: nowrap; }
+.account-signed-in form { margin: 0; }
+.account-signout { padding: 7px 0; border: 0; background: transparent; cursor: pointer; }
+.account-control:hover,.account-signout:hover { color: #9b8252; }
+.section-index { position: sticky; top: 0; z-index: 9; display: flex; justify-content: center; gap: clamp(14px,2.3vw,32px); overflow-x: auto; padding: 12px 5%; border-bottom: 1px solid #ffffff1a; background: #17221eeF; scrollbar-width: none; }
+.section-index::-webkit-scrollbar { display:none; }
+.section-index a { color: #e5e8df; font-size: 9px; letter-spacing: .04em; text-decoration: none; white-space: nowrap; }
+.section-index a:hover { color: #d9c27e; }
+.music-site .music-hero { min-height: calc(100svh - 122px); display: block; padding: 0; background: #131a17; isolation: isolate; }
+.music-site .music-hero-copy { position: absolute; top: 50%; left: max(7%,calc((100vw - 1220px)/2)); z-index: 3; width: min(540px,48vw); padding: clamp(20px,3vw,44px); transform: translateY(-48%); border: 1px solid #f5f1e928; background: linear-gradient(135deg,#101a16d9,#101a1699); box-shadow: 0 30px 100px #0007; backdrop-filter: blur(8px); }
+.music-site .music-hero-copy .eyebrow { color: #d2b86e; }
+.music-site .music-hero h1 { color: #f6f1e6; font-size: clamp(62px,9vw,132px); }
+.music-site .music-hero h1 em { color: #d2b86e; }
+.music-site .music-hero-copy>p { color: #e0e4dc; font-size: clamp(12px,1.2vw,15px); }
+.music-site .music-hero .quiet-link { color: #f2eedf; }
+.music-site .music-hero .hero-caption { display: none; }
+.music-site .music-hero-art.mixer-scene { position: absolute; inset: 0; z-index: -1; display: grid; min-height: 0; place-items: center; overflow: hidden; padding: 8vh 4vw 11vh 31vw; border-radius: 0; background: radial-gradient(ellipse at 70% 45%,#294f3b 0%,#17261f 43%,#101714 79%); box-shadow: none; perspective: 1400px; }
+.mixer-atmosphere { position: absolute; inset: -15%; background: radial-gradient(ellipse at 64% 45%,#b4974d30,transparent 35%),radial-gradient(ellipse at 87% 82%,#42806325,transparent 40%); animation: mixer-glow 9s ease-in-out infinite alternate; }
+.mixer-console { position: relative; width: min(1100px,74vw); padding: 20px 22px 17px; border: 1px solid #c9b87a66; border-radius: 16px; color: #d9d8c9; background: linear-gradient(145deg,#41463e,#1d2420 25%,#141a17 65%,#343a32); box-shadow: 0 44px 100px #0009,inset 0 1px #ffffff4d,inset 0 -3px #0009; transform: rotateX(8deg) rotateY(-7deg); animation: console-float 9s ease-in-out infinite alternate; }
+.mixer-console-top,.mixer-console-bottom { display:flex; align-items:center; justify-content:space-between; gap:12px; color:#b3b7aa; font-size:8px; letter-spacing:.16em; }
+.mixer-live { color:#b8d9af; }.mixer-live i,.mixer-channel-label i,.mixer-console-bottom i { display:inline-block; width:6px; height:6px; margin-right:6px; border-radius:50%; background:#8bd7a3; box-shadow:0 0 10px #71ef9c; animation: indicator-pulse 1.7s ease-in-out infinite; }
+.mixer-screen { margin:15px 0 12px; padding:14px 16px 11px; border:1px solid #9baf8652; border-radius:5px; background:linear-gradient(120deg,#152d25,#0d1915); box-shadow:inset 0 0 35px #0009,0 0 25px #96ce9121; }
+.mixer-screen-head,.mixer-screen-foot { display:flex; justify-content:space-between; gap:8px; color:#9fb59e; font-size:7px; letter-spacing:.15em; }.mixer-screen-head strong{color:#e7d69b;font:italic 17px Georgia,serif;letter-spacing:.05em}
+.mixer-waveform { height:90px; display:flex; align-items:center; justify-content:center; gap:3px; overflow:hidden; margin:10px 0; }
+.mixer-waveform i { flex:1; max-width:8px; height:var(--wave-height); border-radius:5px; background:linear-gradient(0deg,#6eac7e,#c7d69a 50%,#e0c77c); opacity:.76; transform-origin:center; animation: waveform-dance .72s ease-in-out infinite alternate; animation-delay:calc(var(--wave-height) * -0.009); box-shadow:0 0 10px #8ed5a428; }
+.mixer-channel-bank { display:grid; grid-template-columns:repeat(12,minmax(34px,1fr)); gap:6px; }
+.mixer-channel { min-width:0; padding:8px 5px 6px; border:1px solid #ffffff14; border-radius:4px; background:linear-gradient(90deg,#090e0c44,#ffffff0a 48%,#0003); box-shadow:inset 0 0 12px #0005; }
+.mixer-channel-label { overflow:hidden; color:#c9cbbf; font-size:6px; letter-spacing:.1em; text-align:center; white-space:nowrap; }.mixer-channel-label i { width:4px;height:4px;margin-right:3px;background:#b1a567;box-shadow:0 0 6px #c6b769;animation:none }.mixer-channel-label .channel-hot { background:#8bd7a3;animation:indicator-pulse 1.7s infinite; }
+.mixer-eq { display:flex; justify-content:space-around; margin:9px 0; }.mixer-eq i { width:13px;aspect-ratio:1;border:2px dotted #b4b5a6;border-radius:50%;background:radial-gradient(circle at 40% 35%,#667064,#242a26 65%);box-shadow:0 2px 4px #000;transform:rotate(var(--knob-rotation)); }.mixer-eq i::after { content:"";display:block;width:2px;height:5px;margin:-2px auto;background:#d7bd76; }
+.mixer-vu { display:flex; justify-content:center; gap:2px;height:43px;padding:3px;background:#080d0a;border:1px solid #ffffff13; }.mixer-vu i { width:5px;height:100%;background:linear-gradient(to top,#6fc180 0 48%,#cfcb67 70%,#db765a 100%);transform:scaleY(.45);transform-origin:bottom;animation:vu-bounce .48s ease-in-out infinite alternate;animation-delay:var(--meter-delay);filter:drop-shadow(0 0 3px #69c88166); }
+.mixer-fader { position:relative;height:74px;margin:8px auto 5px;width:12px;border-radius:5px;background:repeating-linear-gradient(to bottom,transparent 0 8px,#9a9e9155 9px 10px); }.mixer-fader::after { content:"";position:absolute;top:var(--fader-position);left:-7px;width:24px;height:8px;border:1px solid #d6d0b8;border-radius:2px;background:linear-gradient(#ddd8c6,#72766c 48%,#252b27);box-shadow:0 2px 7px #000; }
+.mixer-channel-bottom { display:flex;justify-content:space-between;color:#91978d;font-size:6px; }.mixer-console-bottom { padding-top:13px; }.mixer-console-bottom i { width:5px;height:5px;background:#d9bd6c;box-shadow:0 0 9px #d9bd6c; }
+.mixer-scene-tag { position:absolute;right:6%;bottom:8%;display:grid;gap:8px;color:#d7dccf;text-align:right;letter-spacing:.17em; }.mixer-scene-tag span { color:#d4bc73;font-size:8px; }.mixer-scene-tag strong { font:italic clamp(20px,3vw,38px) Georgia,serif; }
+.music-site .music-hero-meta { z-index:4; color:#c4c9bd; }
+@keyframes mixer-glow { to { transform:translate3d(2%,1%,0) scale(1.06);opacity:.72; } }
+@keyframes console-float { to { transform:translateY(-10px) rotateX(5deg) rotateY(-4deg); } }
+@keyframes indicator-pulse { 50% { opacity:.35;box-shadow:0 0 3px #71ef9c; } }
+@keyframes waveform-dance { to { transform:scaleY(.34);opacity:.48; } }
+@keyframes vu-bounce { to { transform:scaleY(.9); } }
+@media(max-width:1000px) { .music-site .music-hero-art.mixer-scene { padding-left:24vw; }.mixer-console { width:86vw; }.mixer-channel-bank { gap:3px; }.mixer-channel { padding-right:3px;padding-left:3px; } }
+@media(max-width:760px) { .music-site .music-header { height:auto;min-height:64px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;gap:10px; }.music-site .music-header .desktop-nav { display:none; }.header-account { gap:9px; }.account-control,.account-signout { font-size:9px; }.section-index { justify-content:flex-start; gap:20px; padding:10px 5%; }.music-site .music-hero { min-height:calc(100svh - 103px); }.music-site .music-hero-copy { top:10%;left:5%;width:min(90%,490px);padding:22px;transform:none; }.music-site .music-hero h1 { margin:13px 0;font-size:clamp(50px,13vw,78px); }.music-site .music-hero-copy>p { max-width:390px;font-size:11px; }.music-site .music-hero-art.mixer-scene { align-items:end;padding:0 0 13vh; }.mixer-console { width:112vw;padding:12px 12px 10px;border-radius:11px;transform:rotateX(8deg) rotateY(-4deg) translateX(5%); }.mixer-console-top,.mixer-console-bottom { font-size:6px; }.mixer-screen { margin:10px 0 8px;padding:9px; }.mixer-waveform { height:48px;gap:2px; }.mixer-screen-head strong { font-size:12px; }.mixer-screen-head,.mixer-screen-foot { font-size:5px; }.mixer-channel-bank { grid-template-columns:repeat(12,minmax(26px,1fr));gap:3px; }.mixer-channel { padding:5px 2px 4px; }.mixer-channel-label { font-size:5px; }.mixer-eq { margin:6px 0; }.mixer-eq i { width:9px; }.mixer-vu { height:24px; }.mixer-fader { height:38px;width:8px; }.mixer-fader::after { left:-5px;width:18px;height:6px; }.mixer-scene-tag { right:5%;bottom:9%; }.music-site .music-hero-meta { bottom:12px;font-size:6px; }.music-site .music-hero-meta span:nth-child(2) { display:none; } }
+@media(prefers-reduced-motion:reduce) { .mixer-atmosphere,.mixer-console,.mixer-live i,.mixer-channel-label .channel-hot,.mixer-waveform i,.mixer-vu i { animation:none!important; } }

@@ -1,6 +1,8 @@
 import { StudioMotion } from "./StudioMotion";
 import { CheckoutForm } from "./CheckoutForm";
 import { GrowthHub } from "./GrowthHub";
+import { AnimatedMixer } from "./AnimatedMixer";
+import { AccountControls } from "./AccountControls";
 
 const services = [
   { number: "01", name: "Beat sales & licensing", copy: "Find the right foundation for your song. Beat availability, license scope, and usage terms are confirmed before purchase.", icon: "◌" },
@@ -51,10 +53,12 @@ export default function Home({ memberMode = false }: { memberMode?: boolean } = 
       <div className="notice-bar"><span className="notice-indicator" /> Music services by Majik Mix · Online checkout is being prepared</div>
       <header className="site-header music-header">
         <Brand />
-        <nav className="desktop-nav" aria-label="Main navigation"><a href="#services">Services</a><a href="#beats">Beat previews</a><a href="#videos">Videos</a><a href="#shop">Shop</a><a href="#process">How it works</a><a href="#budgets">Starting prices</a></nav>
-        <a className="header-link header-signup" href="#quote">Start a project</a>
+        <nav className="desktop-nav" aria-label="Main navigation"><a href="#services">Services</a><a href="#beats">Beats</a><a href="#videos">Videos</a><a href="#shop">Shop</a><a href="#community">Community</a></nav>
+        <div className="header-account"><AccountControls /><a className="header-link header-signup" href="#quote">Start a project</a></div>
       </header>
+      <nav className="section-index" aria-label="Explore website sections"><a href="#services">01 Services</a><a href="#beats">02 Beat previews</a><a href="#videos">03 Video</a><a href="#shop">04 Digital shop</a><a href="#community">05 Community</a><a href="#process">06 Process</a><a href="#budgets">07 Pricing</a><a href="#quote">08 Payment</a></nav>
       <section className="music-hero">
+        <AnimatedMixer />
         <div className="music-hero-copy">
           <div className="eyebrow"><span className="eyebrow-rule" /> MUSIC PRODUCTION · NIGERIA</div>
           <h1>Make the sound<br /><em>you hear.</em></h1>
@@ -62,7 +66,6 @@ export default function Home({ memberMode = false }: { memberMode?: boolean } = 
           <div className="hero-actions"><a className="button button-primary" href="#services">Explore services <span aria-hidden="true">↘</span></a><a className="quiet-link" href="#quote">Plan a project <span aria-hidden="true">↗</span></a></div>
           <div className="hero-caption"><span className="caption-mark">✳</span><span>From the first idea<br /><strong>to the final master.</strong></span></div>
         </div>
-        <div className="music-hero-art" role="img" aria-label="Recording studio mixing console and music equipment"><div className="music-hero-light" /><div className="music-hero-vinyl" /><span>MAJIK MIX</span><strong>RECORD · SHAPE · RELEASE</strong></div>
         <div className="music-hero-meta"><span>BEATS &amp; PRODUCTION</span><span>MIXING &amp; MASTERING</span><a href="#services">SCROLL TO EXPLORE ↓</a></div>
       </section>
       <section className="music-intro" id="process"><span>THE PROCESS</span><p>Good work starts with a clear brief.<br /><strong>Every track has its own story.</strong></p><span className="music-intro-mark">M</span></section>
@@ -87,7 +90,7 @@ export default function Home({ memberMode = false }: { memberMode?: boolean } = 
         <p className="music-shop-note">The digital catalog and online checkout are being prepared. Ask for current availability and a written invoice before paying.</p>
       </section>
       <GrowthHub />
-      <section className="music-process-band">
+      <section className="music-process-band" id="process">
         <div><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> A CLEAR PROJECT, STEP BY STEP</div><h2>Brief first.<br /><em>Then we make it.</em></h2><p>Tell the studio what you need, share reference tracks, and set a timeline. You’ll receive a written scope and quote before you pay.</p></div>
         <ol><li><span>01</span><div><strong>Choose a service</strong><small>Beats, production, mix/master, or recording.</small></div></li><li><span>02</span><div><strong>Agree the scope</strong><small>Deliverables, license, revisions, and timing.</small></div></li><li><span>03</span><div><strong>Review your quote</strong><small>Final price and payment instructions in writing.</small></div></li></ol>
       </section>
@@ -99,7 +102,7 @@ export default function Home({ memberMode = false }: { memberMode?: boolean } = 
         <div><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> PAYMENT STATUS</div><h2>Your sound.<br /><em>Your next move.</em></h2><p>Suggested payment schedule: 50% deposit to reserve production or live-instrument sessions, with the balance due before delivery of final masters. Recording-only bookings are paid before the session. A written invoice will confirm the scope and payment details. Online checkout is still being configured.</p></div>
         <CheckoutForm enabled={Boolean(process.env.PAYSTACK_SECRET_KEY)} />
       </section>
-      <footer className="site-footer music-footer"><div className="footer-main"><div><Brand /><p>Sound made with intention.</p></div><div className="footer-links"><a href="#services">Services</a><a href="#shop">Digital shop</a><a href="#process">How it works</a><a href="#budgets">Starting prices</a><a href="#videos">Videos</a></div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 MAJIK MIX.</span><span>MUSIC SERVICES · NIGERIA</span></div></footer>
+      <footer className="site-footer music-footer"><div className="footer-main"><div><Brand /><p>Sound made with intention.</p></div><div className="footer-links"><a href="#services">Services</a><a href="#shop">Digital shop</a><a href="#community">Community</a><a href="#process">How it works</a><a href="#budgets">Starting prices</a><a href="#videos">Videos</a><a href="/auth">Sign in</a><a href="/member">My account</a></div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 MAJIK MIX.</span><span>MUSIC SERVICES · NIGERIA</span></div></footer>
     </main>
   );
 }
