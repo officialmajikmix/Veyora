@@ -2,27 +2,26 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const description = "Music production, beat licensing, mixing, mastering, and studio recording by Majik Mix. Request a clear written quote before checkout.";
-const title = "Majik Mix — Music Production & Sound";
+const description = "Majik Mix creates original beats, full music productions, mixes, masters, studio sessions, sample packs, and music tools.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://veyora-ecru.vercel.app"),
-  title,
+  title: "Majik Mix — Music Production & Sound",
   description,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: "/",
     siteName: "Majik Mix",
-    title,
+    title: "Majik Mix — Music Production & Sound",
     description,
-    images: ["https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=85"],
+    images: ["https://images.unsplash.com/photo-1663908378462-96f985b176bd?auto=format&fit=crop&w=1200&q=85"],
   },
   twitter: {
     card: "summary_large_image",
-    title,
+    title: "Majik Mix — Music Production & Sound",
     description,
-    images: ["https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=85"],
+    images: ["https://images.unsplash.com/photo-1663908378462-96f985b176bd?auto=format&fit=crop&w=1200&q=85"],
   },
 };
 
