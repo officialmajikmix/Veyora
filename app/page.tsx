@@ -7,6 +7,7 @@ import { getAuthState } from "./authState";
 import { BeatSketchPlayer } from "./BeatSketchPlayer";
 import { getMediaCatalog } from "./mediaCatalog";
 import { MediaLibrary } from "./MediaLibrary";
+import { ArtistVideoCard } from "./ArtistVideoCard";
 
 const services = [
   { number: "01", name: "Beat sales & licensing", copy: "Find the right foundation for your song. Beat availability, license scope, and usage terms are confirmed before purchase.", icon: "◌" },
@@ -45,11 +46,13 @@ const beatSamples: Array<{ title: string; style: string; price: string; audioUrl
 // Add approved video clips here after uploading them into public/videos.
 const videoSamples: Array<{ title: string; category: string; videoUrl: string }> = [];
 
+export const dynamic = "force-dynamic";
+
 function Brand() {
   return <a className="brand" href="#top" aria-label="Majik Mix home"><span className="brand-mark">M</span><span>MAJIK MIX</span></a>;
 }
 
-export default async function Home({ memberMode = false }: { memberMode?: boolean } = {}) {
+export default async function Home() {
   const [{ signedIn, isAdmin }, catalog] = await Promise.all([getAuthState(), getMediaCatalog()]);
   return (
     <main className="music-site" id="top">
@@ -84,10 +87,10 @@ export default async function Home({ memberMode = false }: { memberMode?: boolea
         <p className="music-shelf-note">These playable sketches are generated previews to explore the feel. Majik Mix beat files and license details will appear here when uploaded.</p>
       </section>
       <section className="music-section music-video-showcase" id="videos">
-        <div className="music-section-heading"><div><div className="eyebrow"><span className="eyebrow-rule" /> VIDEO SHOWCASE</div><h2>Watch the<br /><em>sound take shape.</em></h2></div><p>Watch studio sessions, performance clips, and beat previews from Majik Mix.</p></div>
-        <div className="music-video-shelf" aria-label="Scrollable studio video previews">{videoSamples.length > 0 ? <div className="music-video-grid">{videoSamples.map((video) => <article className="music-video-card" key={video.title}><video controls playsInline preload="metadata" src={video.videoUrl} aria-label={`Play ${video.title}`} /><div><span>{video.category}</span><h3>{video.title}</h3></div></article>)}</div> : <div className="music-video-grid music-video-teasers">{[["STUDIO SESSIONS", "Inside the room", "01"], ["BEAT BREAKDOWNS", "From drums to groove", "02"], ["ARTIST STORIES", "Made together", "03"]].map(([category, title, number]) => <article className="music-video-teaser" key={category}><div className="video-teaser-art"><span>MAJIK MIX · {number}</span><strong>{title}</strong><i>▶</i><small>VIDEO CLIPS COMING SOON</small></div><div><span>{category}</span><h3>{title}</h3></div></article>)}</div>}</div>
+        <div className="music-section-heading"><div><div className="eyebrow"><span className="eyebrow-rule" /> VIDEO SHOWCASE</div><h2>Watch the<br /><em>sound take shape.</em></h2></div><div><p>Studio clips and artist uploads connected to their original songs. Watch, join the conversation, and discover new artists.</p><a className="video-upload-link" href={signedIn ? "/member/videos" : "/auth?next=%2Fmember%2Fvideos"}>{signedIn ? "Upload your video ↗" : "Sign in to upload a video ↗"}</a></div></div>
+        <div className="music-video-shelf" aria-label="Scrollable studio video previews">{catalog.videos.length ? <div className="music-video-grid">{catalog.videos.map((video) => <ArtistVideoCard key={video.id} video={video} src={video.playback_url ?? ""} signedIn={signedIn} />)}</div> : <div className="music-video-grid music-video-teasers">{[["STUDIO SESSIONS", "Inside the room", "01"], ["BEAT BREAKDOWNS", "From drums to groove", "02"], ["ARTIST STORIES", "Made together", "03"]].map(([category, title, number]) => <article className="music-video-teaser" key={category}><div className="video-teaser-art"><span>MAJIK MIX · {number}</span><strong>{title}</strong><i>▶</i><small>VIDEO CLIPS COMING SOON</small></div><div><span>{category}</span><h3>{title}</h3></div></article>)}</div>}</div>
       </section>
-      <MediaLibrary audio={catalog.audio} artists={catalog.artists} videos={catalog.videos} storageUrl={catalog.storageUrl} videoStorageUrl={catalog.videoStorageUrl} />
+      <MediaLibrary audio={catalog.audio} artists={catalog.artists} storageUrl={catalog.storageUrl} />
       <section className="music-section music-shop-section" id="shop">
         <div className="music-section-heading"><div><div className="eyebrow"><span className="eyebrow-rule" /> DIGITAL SHOP</div><h2>Tools for your<br /><em>next sound.</em></h2></div><p>Browse digital products from Majik Mix. Product details, formats, compatibility, license terms, and prices will be confirmed before checkout.</p></div>
         <div className="music-shop-grid">

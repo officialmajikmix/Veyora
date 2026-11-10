@@ -21,6 +21,8 @@ export type ArtistVideo = {
   streaming_url: string | null;
   public_storage_path: string;
   created_at: string;
+  visibility?: "public" | "private";
+  playback_url?: string;
 };
 export type VideoSubmission = ArtistVideo & {
   artist_user_id: string;
@@ -49,12 +51,16 @@ export async function getMediaCatalog() {
   const [{ data: audioData }, { data: artistData }, { data: videoData }] = await Promise.all([
     supabase.from("media_audio").select("id,title,artist,description,copyright_notice,storage_path,created_at").order("created_at", { ascending: false }),
     supabase.from("artist_links").select("id,artist,platform,url,created_at").order("created_at", { ascending: false }),
-    supabase.from("artist_videos").select("id,artist,song_title,caption,audio_origin,streaming_url,public_storage_path,created_at").eq("status", "published").not("public_storage_path", "is", null).order("created_at", { ascending: false }),
+    supabase.from("artist_videos").select("id,artist,song_title,caption,audio_origin,streaming_url,public_storage_path,created_at").eq("status", "published").eq("visibility", "public").not("public_storage_path", "is", null).order("created_at", { ascending: false }),
   ]);
+  const videos = await Promise.all(((videoData ?? []) as ArtistVideo[]).map(async (video) => {
+    const { data } = await supabase.storage.from("majikmix-videos").createSignedUrl(video.public_storage_path, 5 * 60);
+    return { ...video, playback_url: data?.signedUrl ?? "" };
+  }));
   return {
     audio: (audioData ?? []) as AudioItem[],
     artists: (artistData ?? []) as ArtistLink[],
-    videos: (videoData ?? []) as ArtistVideo[],
+    videos,
     storageUrl: `${url}/storage/v1/object/public/majikmix-audio`,
     videoStorageUrl: `${url}/storage/v1/object/public/majikmix-videos`,
   };
