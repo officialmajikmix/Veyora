@@ -1,4 +1,5 @@
 import { StudioMotion } from "./StudioMotion";
+import { CheckoutForm } from "./CheckoutForm";
 
 const services = [
   { number: "01", name: "Beat sales & licensing", copy: "Find the right foundation for your song. Beat availability, license scope, and usage terms are confirmed before purchase.", icon: "◌" },
@@ -94,7 +95,7 @@ export default function Home({ memberMode = false }: { memberMode?: boolean } = 
       </section>
       <section className="music-quote" id="quote">
         <div><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> PAYMENT STATUS</div><h2>Your sound.<br /><em>Your next move.</em></h2><p>Suggested payment schedule: 50% deposit to reserve production or live-instrument sessions, with the balance due before delivery of final masters. Recording-only bookings are paid before the session. A written invoice will confirm the scope and payment details. Online checkout is still being configured.</p></div>
-        <aside><span className="quote-status-dot" /> CHECKOUT SETUP IN PROGRESS<p>Request a written quote and invoice before paying. Beat license rights, deliverables, revisions, and booking dates are agreed per project.</p><small>Crypto wallet payments are not enabled.</small></aside>
+        <CheckoutForm enabled={Boolean(process.env.PAYSTACK_SECRET_KEY)} />
       </section>
       <footer className="site-footer music-footer"><div className="footer-main"><div><Brand /><p>Sound made with intention.</p></div><div className="footer-links"><a href="#services">Services</a><a href="#shop">Digital shop</a><a href="#process">How it works</a><a href="#budgets">Starting prices</a><a href="#videos">Videos</a></div><a className="footer-top-link" href="#top">Back to top ↑</a></div><div className="footer-bottom"><span>© 2026 MAJIK MIX.</span><span>MUSIC SERVICES · NIGERIA</span></div></footer>
     </main>
