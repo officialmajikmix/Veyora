@@ -61,6 +61,8 @@ export default function AuthPage() {
     setBusy(true);
     try {
       const supabase = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!);
+      const requestedNext = new URLSearchParams(window.location.search).get("next");
+      const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/member";
       if (mode === "recovery") {
         const secureCookie = window.location.protocol === "https:" ? "; Secure" : "";
         document.cookie = "veyora_recovery=1; Max-Age=900; Path=/; SameSite=Lax" + secureCookie;
@@ -77,7 +79,7 @@ export default function AuthPage() {
       }
 
       const { data, error } = mode === "signup"
-        ? await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + "/auth/callback" } })
+        ? await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + "/auth/callback?next=" + encodeURIComponent(next) } })
         : await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
@@ -88,7 +90,7 @@ export default function AuthPage() {
         setMessage("Check your email to confirm your account, then sign in here.");
         return;
       }
-      window.location.assign("/member");
+      window.location.assign(next);
     } catch (error) {
       if (mode === "recovery") document.cookie = "veyora_recovery=; Max-Age=0; Path=/; SameSite=Lax";
       setMessage(readableAuthError(error));
@@ -98,11 +100,11 @@ export default function AuthPage() {
   }
 
   const heading = mode === "signin" ? "Welcome back." : mode === "signup" ? "A considered start." : "Reset your password.";
-  const intro = mode === "signin" ? "Sign in to continue to Veyora." : mode === "signup" ? "Create an account to explore Veyora." : "Enter your account email and we’ll send a secure reset link.";
+  const intro = mode === "signin" ? "Sign in to share Majik Mix and manage your account." : mode === "signup" ? "Create an account to share Majik Mix and manage your account." : "Enter your account email and we’ll send a secure reset link.";
 
   return (
     <main className="auth-page">
-      <a className="brand" href="/" aria-label="Veyora home"><span className="brand-mark">V</span><span>VEYORA<span className="brand-period">.</span></span></a>
+      <a className="brand" href="/" aria-label="Majik Mix home"><span className="brand-mark">M</span><span>MAJIK MIX</span></a>
       <section className="auth-card">
         <span className="eyebrow">MEMBER ACCESS</span>
         <h1>{heading}</h1>
@@ -125,7 +127,7 @@ export default function AuthPage() {
         </form>
         {mode === "signin" && <button type="button" className="auth-link" onClick={() => changeMode("recovery")}>Forgot password?</button>}
         {mode === "recovery" && <button type="button" className="auth-link" onClick={() => changeMode("signin")}>Back to sign in</button>}
-        {!configured && <p className="auth-note">Secure account access is not available yet. The sign-in service will be connected before Veyora accepts email or password details.</p>}
+        {!configured && <p className="auth-note">Secure account access is not available yet. The sign-in service will be connected before Majik Mix accepts email or password details.</p>}
         {message && <p className="auth-message" role="status">{message}</p>}
         <a className="auth-home" href="/">← Back to home</a>
       </section>
