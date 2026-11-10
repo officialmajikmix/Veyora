@@ -53,11 +53,12 @@ export function GrowthHub() {
         </div>
 
         <aside className="growth-program-panel">
-          <span className="growth-kicker">REFERRAL BONUS · IN PREPARATION</span>
-          <h3>Bring an artist in.<br /><em>Get studio credit.</em></h3>
-          <p>We’re preparing a bonus for referrals that become a completed paid booking. The amount, eligibility, and tracking rules will be shown before the program opens. No cash bonus or referral tracking is active yet.</p>
-          <div className="growth-reward-note"><span>01</span><span>Reward type planned</span><strong>Majik Mix studio credit</strong></div>
-          <p className="growth-policy">Referral credit will be tied to genuine new customers and completed services, with clear terms and fraud checks.</p>
+          <span className="growth-kicker">REFERRAL REWARDS · PLANNED</span>
+          <h3>Bring an artist in.<br /><em>Earn when they book.</em></h3>
+          <p>Planned reward: ₦1,000 for a referred artist after their first paid booking, plus 5% of that artist’s paid full-production order. The booking and payment must be verified before a reward is earned.</p>
+          <div className="growth-reward-note"><span>01</span><span>Referral bonus</span><strong>₦1,000 after first paid booking</strong></div>
+          <div className="growth-reward-note"><span>02</span><span>Full-production commission</span><strong>5% of the paid production order</strong></div>
+          <p className="growth-policy">Rewards are not active yet. Referral links, order attribution, fraud checks, final terms, and payout handling must be connected before launch.</p>
         </aside>
       </div>
 
@@ -68,7 +69,7 @@ export function GrowthHub() {
           <span><b>02</b> Post real studio clips</span>
           <span><b>03</b> Promote services to artists</span>
         </div>
-        <p className="campaign-policy">Google ad clicks or views are never tasks for rewards. Ad traffic must come from genuine interest; this hub won’t pay for, simulate, or request ad interactions.</p>
+        <p className="campaign-policy">Google ad clicks, views, and ad revenue are not rewardable tasks. Google requires genuine ad interest. The planned 5% commission applies to verified service sales attributed to a referral, never to ad activity or ad earnings.</p>
       </div>
     </section>
   );
