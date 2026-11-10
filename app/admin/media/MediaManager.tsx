@@ -16,8 +16,9 @@ export function MediaManager({ audio: initialAudio, artists: initialArtists }: {
 
   async function uploadAudio(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formElement = event.currentTarget;
     if (!supabase) return setMessage("Supabase account services are not configured.");
-    const form = new FormData(event.currentTarget);
+    const form = new FormData(formElement);
     const file = form.get("audio") as File;
     if (!file || !audioTypes.has(file.type)) return setMessage("Choose an MP3, M4A, AAC, WAV, FLAC, or OGG audio file.");
     if (file.size > 50 * 1024 * 1024) return setMessage("Files must be 50 MB or smaller.");
@@ -30,24 +31,26 @@ export function MediaManager({ audio: initialAudio, artists: initialArtists }: {
     const row = { title: String(form.get("title") ?? "").trim(), artist: String(form.get("artist") ?? "").trim(), description: String(form.get("description") ?? "").trim(), copyright_notice: String(form.get("copyright") ?? "").trim(), storage_path: path };
     const { data, error } = await supabase.from("media_audio").insert(row).select("id,title,artist,description,copyright_notice,storage_path,created_at").single();
     if (error) { await supabase.storage.from("majikmix-audio").remove([path]); setBusy(false); return setMessage(error.message); }
-    setAudio((items) => [data as AudioItem, ...items]); event.currentTarget.reset(); setBusy(false); setMessage("Audio uploaded and published for public download.");
+    setAudio((items) => [data as AudioItem, ...items]); formElement.reset(); setBusy(false); setMessage("Audio uploaded and published for public download.");
   }
 
   async function addArtistLink(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formElement = event.currentTarget;
     if (!supabase) return setMessage("Supabase account services are not configured.");
-    const form = new FormData(event.currentTarget);
+    const form = new FormData(formElement);
     const url = String(form.get("url") ?? "").trim();
     try { if (new URL(url).protocol !== "https:") throw new Error(); } catch { return setMessage("Enter a valid secure https:// artist streaming link."); }
     setBusy(true); setMessage("");
     const row = { artist: String(form.get("artist") ?? "").trim(), platform: String(form.get("platform") ?? "").trim(), url };
     const { data, error } = await supabase.from("artist_links").insert(row).select("id,artist,platform,url,created_at").single();
     if (error) { setBusy(false); return setMessage(error.message); }
-    setArtists((items) => [data as ArtistLink, ...items]); event.currentTarget.reset(); setBusy(false); setMessage("Artist link added to the public page.");
+    setArtists((items) => [data as ArtistLink, ...items]); formElement.reset(); setBusy(false); setMessage("Artist link added to the public page.");
   }
 
   async function removeAudio(item: AudioItem) {
     if (!supabase) return;
+    if (!window.confirm(`Remove “${item.title}” from public downloads? The audio file will be deleted.`)) return;
     setBusy(true);
     const { error } = await supabase.from("media_audio").delete().eq("id", item.id);
     if (!error) { await supabase.storage.from("majikmix-audio").remove([item.storage_path]); setAudio((items) => items.filter((row) => row.id !== item.id)); }
@@ -56,6 +59,7 @@ export function MediaManager({ audio: initialAudio, artists: initialArtists }: {
 
   async function removeArtist(item: ArtistLink) {
     if (!supabase) return;
+    if (!window.confirm(`Remove the public streaming link for “${item.artist}”?`)) return;
     setBusy(true); const { error } = await supabase.from("artist_links").delete().eq("id", item.id);
     if (!error) setArtists((items) => items.filter((row) => row.id !== item.id));
     setBusy(false); setMessage(error?.message ?? "Artist link removed.");
