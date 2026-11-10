@@ -483,3 +483,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid #bd9b57; outline-offs
 @media(max-width:1000px) { .music-site .music-hero-art.mixer-scene { padding-left:24vw; }.mixer-console { width:86vw; }.mixer-channel-bank { gap:3px; }.mixer-channel { padding-right:3px;padding-left:3px; } }
 @media(max-width:760px) { .music-site .music-header { height:auto;min-height:64px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;gap:10px; }.music-site .music-header .desktop-nav { display:none; }.header-account { gap:9px; }.account-control,.account-signout { font-size:9px; }.section-index { justify-content:flex-start; gap:20px; padding:10px 5%; }.music-site .music-hero { min-height:calc(100svh - 103px); }.music-site .music-hero-copy { top:10%;left:5%;width:min(90%,490px);padding:22px;transform:none; }.music-site .music-hero h1 { margin:13px 0;font-size:clamp(50px,13vw,78px); }.music-site .music-hero-copy>p { max-width:390px;font-size:11px; }.music-site .music-hero-art.mixer-scene { align-items:end;padding:0 0 13vh; }.mixer-console { width:112vw;padding:12px 12px 10px;border-radius:11px;transform:rotateX(8deg) rotateY(-4deg) translateX(5%); }.mixer-console-top,.mixer-console-bottom { font-size:6px; }.mixer-screen { margin:10px 0 8px;padding:9px; }.mixer-waveform { height:48px;gap:2px; }.mixer-screen-head strong { font-size:12px; }.mixer-screen-head,.mixer-screen-foot { font-size:5px; }.mixer-channel-bank { grid-template-columns:repeat(12,minmax(26px,1fr));gap:3px; }.mixer-channel { padding:5px 2px 4px; }.mixer-channel-label { font-size:5px; }.mixer-eq { margin:6px 0; }.mixer-eq i { width:9px; }.mixer-vu { height:24px; }.mixer-fader { height:38px;width:8px; }.mixer-fader::after { left:-5px;width:18px;height:6px; }.mixer-scene-tag { right:5%;bottom:9%; }.music-site .music-hero-meta { bottom:12px;font-size:6px; }.music-site .music-hero-meta span:nth-child(2) { display:none; } }
 @media(prefers-reduced-motion:reduce) { .mixer-atmosphere,.mixer-console,.mixer-live i,.mixer-channel-label .channel-hot,.mixer-waveform i,.mixer-vu i { animation:none!important; } }
+
+/* Public, horizontal media shelves */
+.music-beat-shelf,.music-video-shelf { overflow-x:auto; overflow-y:hidden; padding:0 0 16px; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-color:#a3946a #e5e0d5; scrollbar-width:thin; }
+.music-site .music-beat-grid,.music-site .music-video-grid { display:flex; gap:16px; width:max-content; min-width:100%; }
+.music-beat-card { flex:0 0 min(320px,82vw); scroll-snap-align:start; }
+.music-video-card { flex:0 0 min(440px,84vw); scroll-snap-align:start; }
+.music-video-empty { width:min(720px,86vw); min-height:190px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:12px; scroll-snap-align:start; }
+.music-video-empty p { max-width:540px; }
+.music-video-empty a { color:#315c43; font-size:10px; }
+.music-shelf-note { margin:13px 0 0; color:#727d74; font-size:9px; line-height:1.7; }
+.music-sketch-card { background:radial-gradient(ellipse at 80% 0%,#d7c58a44,transparent 45%),#17372a; border-color:#17372a; color:#f3efe5; }
+.music-sketch-card h3,.music-sketch-card strong { color:#f3efe5; }
+.music-sketch-card>div>span { color:#d2b86e; }
+.sketch-wave { height:42px; display:flex; align-items:center; gap:3px; padding:5px 8px; background:#0e2119; border:1px solid #ffffff20; }
+.sketch-wave i { flex:1; height:var(--sketch-height); border-radius:3px; background:linear-gradient(0deg,#639773,#d7c27b); opacity:.72; }
+.sketch-wave-playing i { animation:sketch-pulse .5s ease-in-out infinite alternate; animation-delay:calc(var(--sketch-height) * -.008); }
+.sketch-play-button { min-height:40px; padding:0 13px; border:1px solid #d2b86e99; background:#ffffff0b; color:#f3efe5; font-size:10px; cursor:pointer; }
+.sketch-play-button:hover { background:#d2b86e22; }
+.growth-account-link { display:inline-block; margin-top:16px; color:#e9d69a; font-size:9px; text-underline-offset:4px; }
+@keyframes sketch-pulse { to { transform:scaleY(.28); opacity:.42; } }
+@media(max-width:680px) { .music-beat-card { flex-basis:82vw; }.music-video-card { flex-basis:88vw; }.music-video-empty { min-height:160px; } }
+@media(prefers-reduced-motion:reduce) { .sketch-wave-playing i { animation:none; } }

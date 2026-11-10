@@ -3,6 +3,8 @@ import { CheckoutForm } from "./CheckoutForm";
 import { GrowthHub } from "./GrowthHub";
 import { AnimatedMixer } from "./AnimatedMixer";
 import { AccountControls } from "./AccountControls";
+import { getSignedInState } from "./authState";
+import { BeatSketchPlayer } from "./BeatSketchPlayer";
 
 const services = [
   { number: "01", name: "Beat sales & licensing", copy: "Find the right foundation for your song. Beat availability, license scope, and usage terms are confirmed before purchase.", icon: "◌" },
@@ -45,7 +47,8 @@ function Brand() {
   return <a className="brand" href="#top" aria-label="Majik Mix home"><span className="brand-mark">M</span><span>MAJIK MIX</span></a>;
 }
 
-export default function Home({ memberMode = false }: { memberMode?: boolean } = {}) {
+export default async function Home({ memberMode = false }: { memberMode?: boolean } = {}) {
+  const signedIn = await getSignedInState();
   return (
     <main className="music-site" id="top">
       <StudioMotion />
@@ -63,7 +66,7 @@ export default function Home({ memberMode = false }: { memberMode?: boolean } = 
           <div className="eyebrow"><span className="eyebrow-rule" /> MUSIC PRODUCTION · NIGERIA</div>
           <h1>Make the sound<br /><em>you hear.</em></h1>
           <p>Beats, full music production, mixing, mastering, and studio recording—crafted around your song and your vision.</p>
-          <div className="hero-actions"><a className="button button-primary" href="#services">Explore services <span aria-hidden="true">↘</span></a><a className="quiet-link" href="#quote">Plan a project <span aria-hidden="true">↗</span></a></div>
+          <div className="hero-actions"><a className="button button-primary" href="#beats">Explore beat samples <span aria-hidden="true">↘</span></a><a className="quiet-link" href="#videos">Watch studio clips <span aria-hidden="true">↗</span></a></div>
           <div className="hero-caption"><span className="caption-mark">✳</span><span>From the first idea<br /><strong>to the final master.</strong></span></div>
         </div>
         <div className="music-hero-meta"><span>BEATS &amp; PRODUCTION</span><span>MIXING &amp; MASTERING</span><a href="#services">SCROLL TO EXPLORE ↓</a></div>
@@ -75,11 +78,12 @@ export default function Home({ memberMode = false }: { memberMode?: boolean } = 
       </section>
       <section className="music-section music-beat-previews" id="beats">
         <div className="music-section-heading"><div><div className="eyebrow"><span className="eyebrow-rule" /> BEAT PREVIEWS</div><h2>Press play.<br /><em>Find your sound.</em></h2></div><p>Listen to a preview before choosing a beat. Preview clips are for listening; license terms and usage rights are confirmed in your written quote.</p></div>
-        {beatSamples.length > 0 ? <div className="music-beat-grid">{beatSamples.map((beat) => <article className="music-beat-card" key={beat.title}><div><span>{beat.style}</span><h3>{beat.title}</h3><strong>{beat.price}</strong></div><audio controls preload="none" src={beat.audioUrl} aria-label={`Play preview of ${beat.title}`} /></article>)}</div> : <div className="music-beat-empty"><span>PREVIEW LIBRARY IN PROGRESS</span><p>Beat samples will appear here once the audio previews are added.</p></div>}
+        <div className="music-beat-shelf" aria-label="Scrollable beat previews"><div className="music-beat-grid">{beatSamples.map((beat) => <article className="music-beat-card" key={beat.title}><div><span>{beat.style}</span><h3>{beat.title}</h3><strong>{beat.price}</strong></div><audio controls preload="none" src={beat.audioUrl} aria-label={`Play preview of ${beat.title}`} /></article>)}<BeatSketchPlayer title="Afrobeat pulse" style="AFROBEAT · SOUND SKETCH" tempo={104} /><BeatSketchPlayer title="Highlife sunshine" style="HIGHLIFE · SOUND SKETCH" tempo={112} /><BeatSketchPlayer title="Late-night pocket" style="HIP-HOP · SOUND SKETCH" tempo={88} /></div></div>
+        <p className="music-shelf-note">These playable sketches are generated previews to explore the feel. Majik Mix beat files and license details will appear here when uploaded.</p>
       </section>
       <section className="music-section music-video-showcase" id="videos">
         <div className="music-section-heading"><div><div className="eyebrow"><span className="eyebrow-rule" /> VIDEO SHOWCASE</div><h2>Watch the<br /><em>sound take shape.</em></h2></div><p>Watch studio sessions, performance clips, and beat previews from Majik Mix.</p></div>
-        {videoSamples.length > 0 ? <div className="music-video-grid">{videoSamples.map((video) => <article className="music-video-card" key={video.title}><video controls playsInline preload="metadata" src={video.videoUrl} aria-label={`Play ${video.title}`} /><div><span>{video.category}</span><h3>{video.title}</h3></div></article>)}</div> : <div className="music-video-empty"><span>VIDEO LIBRARY IN PROGRESS</span><p>Studio and beat videos will appear here when the clips are added.</p></div>}
+        <div className="music-video-shelf" aria-label="Scrollable studio video previews">{videoSamples.length > 0 ? <div className="music-video-grid">{videoSamples.map((video) => <article className="music-video-card" key={video.title}><video controls playsInline preload="metadata" src={video.videoUrl} aria-label={`Play ${video.title}`} /><div><span>{video.category}</span><h3>{video.title}</h3></div></article>)}</div> : <div className="music-video-empty"><span>STUDIO VIDEO CHANNEL</span><p>Scroll through studio sessions, beat breakdowns, and artist stories here. Video clips are being added.</p><a href="#services">Explore music services ↗</a></div>}</div>
       </section>
       <section className="music-section music-shop-section" id="shop">
         <div className="music-section-heading"><div><div className="eyebrow"><span className="eyebrow-rule" /> DIGITAL SHOP</div><h2>Tools for your<br /><em>next sound.</em></h2></div><p>Browse digital products from Majik Mix. Product details, formats, compatibility, license terms, and prices will be confirmed before checkout.</p></div>
@@ -89,7 +93,7 @@ export default function Home({ memberMode = false }: { memberMode?: boolean } = 
         </div>
         <p className="music-shop-note">The digital catalog and online checkout are being prepared. Ask for current availability and a written invoice before paying.</p>
       </section>
-      <GrowthHub />
+      <GrowthHub signedIn={signedIn} />
       <section className="music-process-band" id="process">
         <div><div className="eyebrow eyebrow-light"><span className="eyebrow-rule" /> A CLEAR PROJECT, STEP BY STEP</div><h2>Brief first.<br /><em>Then we make it.</em></h2><p>Tell the studio what you need, share reference tracks, and set a timeline. You’ll receive a written scope and quote before you pay.</p></div>
         <ol><li><span>01</span><div><strong>Choose a service</strong><small>Beats, production, mix/master, or recording.</small></div></li><li><span>02</span><div><strong>Agree the scope</strong><small>Deliverables, license, revisions, and timing.</small></div></li><li><span>03</span><div><strong>Review your quote</strong><small>Final price and payment instructions in writing.</small></div></li></ol>
