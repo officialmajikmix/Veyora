@@ -7,11 +7,12 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
   const recovery = request.cookies.get("veyora_recovery")?.value === "1";
   const next = searchParams.get("next");
-  const destination = recovery || next === "/auth/reset-password" ? "/auth/reset-password" : "/member";
+  const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/member";
+  const destination = recovery || next === "/auth/reset-password" ? "/auth/reset-password" : safeNext;
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-  if (code && destination === "/auth/reset-password") {
+  if (code && (recovery || next === "/auth/reset-password")) {
     const resetUrl = new URL(destination, origin);
     resetUrl.searchParams.set("code", code);
     const response = NextResponse.redirect(resetUrl);
